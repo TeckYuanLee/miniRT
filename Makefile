@@ -1,6 +1,6 @@
 NAME = minirt
 
-GCC = gcc -Wall -Wextra
+GCC = gcc -Wall -Wextra -Werror -fsanitize=address -g3
 OS_NAME := $(shell uname -s | tr A-Z a-z)
 VALGRIND = valgrind --leak-check=full \
          --show-leak-kinds=all \
@@ -31,9 +31,11 @@ LIB = $(MLXLIB) $(FTLIB)
 
 DEPS = include/minirt.h
 
-SRC = main.c put_pixel.c handle_key_release.c
+SRC_TEST = render_gradient.c
 
-vpath %.c src src/hook
+SRC = main.c put_pixel.c handle_key_release.c $(SRC_TEST)
+
+vpath %.c src src/hook src/test
 
 OBJDIR = obj
 OBJ = $(SRC:%.c=$(OBJDIR)/%.o)
@@ -44,7 +46,8 @@ $(NAME): $(OBJ)
 	$(GCC) $^ $(LIB) -o $@
 
 r : $(NAME)
-	$(VALGRIND) ./$<
+	# $(VALGRIND) ./$<
+	./$<
 
 $(OBJDIR)/%.o: %.c $(DEPS)
 	mkdir -p $(OBJDIR)
