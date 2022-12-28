@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 12:32:10 by jatan             #+#    #+#             */
-/*   Updated: 2022/12/28 18:49:44 by jatan            ###   ########.fr       */
+/*   Updated: 2022/12/28 19:14:55 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 # define WIDTH 1000
 # define HEIGHT 800
 
+
 typedef struct s_vector
 {
-	double	x;
-	double	z;
-	double	w;
-	double	y;
+	double	e1;
+	double	e2;
+	double	e3;
+	double	e4;
 }				t_vector;
 
 typedef struct s_color
