@@ -6,12 +6,12 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:30:30 by jatan             #+#    #+#             */
-/*   Updated: 2022/12/30 22:47:22 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/01 22:11:31 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJECTS_H
-# define OBJECTS_H
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
 enum e_vec_type {x=0, y=1, z=2, r=0, g=1, b=2};
 typedef struct s_vector

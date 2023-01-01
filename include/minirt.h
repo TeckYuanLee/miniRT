@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 12:32:10 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/01 22:04:00 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/01 22:11:47 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 # define WIDTH 1000
 # define HEIGHT 800
 
-# include "objects.h"
+# include "structs.h"
 
 
 void		render_gradient(t_data *data);
-void		render_image(t_data *data);
+void		render_image(t_data *data, t_object *objects);
+
 
 
 int			create_trgb(int t, int r, int g, int b);
