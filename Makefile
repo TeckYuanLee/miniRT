@@ -29,16 +29,20 @@ FTLIB = -Llibft -lft
 INC = -Iinclude $(FTINC) $(MLXINC)
 LIB = $(MLXLIB) $(FTLIB)
 
-DEPS = include/minirt.h
+DEPS = include/minirt.h include/objects.h
 
-SRC_TEST = render_gradient.c
 
-SRC = main.c put_pixel.c handle_key_release.c $(SRC_TEST)
+SRC =	main.c \
+		$(addprefix src/, \
+			$(addprefix hook/, handle_key_release.c) \
+			$(addprefix utils/, put_pixel.c) \
+			$(addprefix vect_utils/, get.c set.c new_vect.c) \
+			$(addprefix test/, render_gradient.c) \
+		)
 
-vpath %.c src src/hook src/test
 
-OBJDIR = obj
-OBJ = $(SRC:%.c=$(OBJDIR)/%.o)
+OBJDIR = obj/
+OBJ = $(SRC:$(notdir %.c)=$(OBJDIR)%.o)
 
 all: $(NAME)
 
@@ -49,8 +53,8 @@ r : $(NAME)
 	# $(VALGRIND) ./$<
 	./$<
 
-$(OBJDIR)/%.o: %.c $(DEPS)
-	mkdir -p $(OBJDIR)
+$(OBJDIR)%.o: %.c $(DEPS)
+	mkdir -p $(dir $@)
 	$(GCC) $(INC) -c $< -o $@
 
 clean:
