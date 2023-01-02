@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   objects.h                                          :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:30:30 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/01 22:11:31 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/01 22:15:59 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ union u_objects
 	t_cylinder	cy;
 	t_triangle	tr;
 };
+
 //what if we put color here rather than repeating in all the obj structs?
 //linked list of objects
 typedef struct s_object
@@ -78,6 +79,12 @@ typedef struct s_object
 	t_vector		color;
 	struct s_object	*next;
 }				t_object;
+
+typedef struct s_ray
+{
+	t_vector	origin;
+	t_vector	dir;
+}				t_ray;
 
 typedef struct s_data
 {
