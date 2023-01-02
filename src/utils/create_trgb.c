@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_gradient.c                                  :+:      :+:    :+:   */
+/*   create_trgb.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 17:50:36 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/01 22:04:08 by jatan            ###   ########.fr       */
+/*   Created: 2023/01/01 22:03:24 by jatan             #+#    #+#             */
+/*   Updated: 2023/01/01 22:03:32 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include <stdio.h>
 
-
-void	render_gradient(t_data *data)
+int	create_trgb(int t, int r, int g, int b)
 {
-	int			x;
-	int			y;
-	t_vector	color;
+	return (t << 24 | r << 16 | g << 8 | b);
+}
 
-	y = HEIGHT;
-	while (--y >= 0)
-	{
-		x = -1;
-		while (++x < WIDTH)
-		{
-			set(&color, r, (double)x / WIDTH);
-			set(&color, g, (double)y / HEIGHT);
-			set(&color, b, 0.2);
+int	create_trgb_vec(t_vector *color)
+{
+	int	t;
+	int	r_val;
+	int	g_val;
+	int	b_val;
 
-			put_pixel(data, x, y, create_trgb_vec(&color));
-		}
-	}
+	t = 0;
+	r_val = get(color, r) * 255;
+	g_val = get(color, g) * 255;
+	b_val = get(color, b) * 255;
+	return (t << 24 | r_val << 16 | g_val << 8 | b_val);
 }
