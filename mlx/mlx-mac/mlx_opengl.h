@@ -18,4 +18,4 @@ int	mlx_opengl_swap_buffers(void *win_ptr);
 
 int	mlx_opengl_window_set_context(void *win_ptr);
 
-/* in case multiple opengl windows are present, change opengl active context */
+/* in case v_multiple opengl windows are present, change opengl active context */

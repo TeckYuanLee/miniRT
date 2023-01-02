@@ -29,19 +29,19 @@ FTLIB = -Llibft -lft
 INC = -Iinclude $(FTINC) $(MLXINC)
 LIB = $(MLXLIB) $(FTLIB)
 
-DEPS = include/minirt.h include/objects.h
+DEPS = include/minirt.h include/structs.h
 
 
-SRC =	main.c render_image.c \
-		$(addprefix src/, \
+SRC :=	main.c \
+		$(addprefix src/, render_image.c \
 			$(addprefix hook/, handle_key_release.c) \
 			$(addprefix utils/, put_pixel.c create_trgb.c render_gradient.c) \
-			$(addprefix vect_utils/, get.c set.c new_vect.c multi_div_sum_subtr.c multi_div_sum_subtr_d.c) \
+			$(addprefix vect_utils/, get.c set.c new_vect.c multi_div_sum_subtr.c multi_div_sum_subtr_d.c vec_math.c) \
 		)
 
 
 OBJDIR = obj/
-OBJ = $(SRC:$(notdir %.c)=$(OBJDIR)%.o)
+OBJ := $(SRC:%.c=$(OBJDIR)%.o)
 
 all: $(NAME)
 
