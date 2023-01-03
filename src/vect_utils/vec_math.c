@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:08:13 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/02 13:41:40 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/03 23:36:38 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,8 @@ double	length(t_vector vec)
 
 t_vector	unit_vector(t_vector vec)
 {
-	return (v_div_d(vec, length(vec)));
+	t_vector	ret;
+
+	ret = v_div_d(vec, length(vec));
+	return (ret);
 }

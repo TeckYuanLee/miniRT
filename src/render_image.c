@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 20:55:54 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/02 13:41:52 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/04 00:07:54 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_vector	calc_color(t_ray ray)
 	unit_dir = unit_vector(ray.dir);
 	t = 0.5 * (get(&unit_dir, y) + 1.0);
 	return (v_sum(v_multi_d(new_vect(1.0, 1.0, 1.0), (1.0 - t)),
-			v_multi_d(new_vect(0.5, 0.7, 1.0), t)));
+			v_multi_d(new_vect(0.3, 0.5, 1.0), t)));
 }
 
 /**
@@ -59,8 +59,7 @@ void	render_image(t_data *data, t_object *objects)
 			ray.dir = v_sum(lower_left_corner,
 					v_sum(v_multi_d(hori, u), v_multi_d(vert, v)));
 			color = calc_color(ray);
-			put_pixel(data, x, y, create_trgb_vec(&color));
+			put_pixel(data, i, j, create_trgb_vec(&color));
 		}
 	}
-
 }
