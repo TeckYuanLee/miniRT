@@ -6,11 +6,12 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 20:55:54 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/04 00:07:54 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/04 08:37:49 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include <stdio.h>
 
 t_vector	calc_color(t_ray ray)
 {
@@ -19,8 +20,8 @@ t_vector	calc_color(t_ray ray)
 
 	unit_dir = unit_vector(ray.dir);
 	t = 0.5 * (get(&unit_dir, y) + 1.0);
-	return (v_sum(v_multi_d(new_vect(1.0, 1.0, 1.0), (1.0 - t)),
-			v_multi_d(new_vect(0.3, 0.5, 1.0), t)));
+	return (v_sum(v_multi_d(new_vect(0.3, 0.5, 1.0), (1.0 - t)),
+			v_multi_d(new_vect(1.0, 1.0, 1.0), t)));
 }
 
 /**

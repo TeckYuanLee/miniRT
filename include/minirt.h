@@ -6,15 +6,15 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 12:32:10 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/02 13:42:10 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/04 08:36:08 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 1000
-# define HEIGHT 800
+# define WIDTH 600
+# define HEIGHT 300
 
 # include "structs.h"
 
