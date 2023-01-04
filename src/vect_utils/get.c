@@ -6,13 +6,13 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 19:19:25 by jatan             #+#    #+#             */
-/*   Updated: 2022/12/30 22:43:14 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/04 09:35:29 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-double	get(t_vector *vec, enum e_vec_type c)
+double	get(t_vec *vec, enum e_vec_type c)
 {
 	if (c == 0)
 		return (vec->e1);

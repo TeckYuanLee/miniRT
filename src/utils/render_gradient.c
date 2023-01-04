@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:50:36 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/01 22:04:08 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/04 09:35:29 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	render_gradient(t_data *data)
 {
 	int			x;
 	int			y;
-	t_vector	color;
+	t_vec	color;
 
 	y = HEIGHT;
 	while (--y >= 0)

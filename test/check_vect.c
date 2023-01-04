@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:01:53 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/03 23:12:05 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/04 09:35:29 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	check_vect_propt(double check, double ans)
 		printf("✅ correct!  ");
 }
 
-void	check_vect(t_vector check, t_vector ans)
+void	check_vect(t_vec check, t_vec ans)
 {
 	check_vect_propt(check.e1, ans.e1);
 	check_vect_propt(check.e2, ans.e2);
@@ -30,7 +30,7 @@ void	check_vect(t_vector check, t_vector ans)
 
 void	run_check_vect(void)
 {
-	t_vector	vect;
+	t_vec	vect;
 
 	set(&vect, x, 1.0);
 	set(&vect, y, 2.0);

@@ -6,19 +6,19 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 20:55:54 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/04 08:37:49 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/04 09:35:29 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include <stdio.h>
 
-t_vector	calc_color(t_ray ray)
+t_vec	calc_color(t_ray ray)
 {
-	t_vector	unit_dir;
+	t_vec	unit_dir;
 	double		t;
 
-	unit_dir = unit_vector(ray.dir);
+	unit_dir = unit_vec(ray.dir);
 	t = 0.5 * (get(&unit_dir, y) + 1.0);
 	return (v_sum(v_multi_d(new_vect(0.3, 0.5, 1.0), (1.0 - t)),
 			v_multi_d(new_vect(1.0, 1.0, 1.0), t)));
@@ -36,14 +36,14 @@ void	render_image(t_data *data, t_object *objects)
 {
 	(void) objects;
 	t_ray		ray;
-	t_vector	lower_left_corner;
-	t_vector	hori;
-	t_vector	vert;
+	t_vec	lower_left_corner;
+	t_vec	hori;
+	t_vec	vert;
 	int			i;
 	int			j;
 	double		u;
 	double		v;
-	t_vector	color;
+	t_vec	color;
 
 	lower_left_corner = new_vect(-2.0, -1.0, -1.0);
 	hori = new_vect(4.0, 0.0, 0.0);
