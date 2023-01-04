@@ -6,15 +6,14 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 12:32:10 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/04 09:35:58 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/04 10:19:08 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 600
-# define HEIGHT 300
+
 
 # include "structs.h"
 
@@ -42,7 +41,10 @@ t_vec		v_div_d(t_vec vec1, double d);
 
 double		length(t_vec vec);
 t_vec		unit_vec(t_vec vec);
+double		dot(t_vec v1, t_vec v2);
 
-double		hit_sphere(const t_vec *center, const double rad, const t_ray *r);
+double		hit_sphere(t_vec center, double rad, t_ray r);
+
+t_vec		point_at_parameter(t_ray ray, double t);
 
 #endif

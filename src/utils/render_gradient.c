@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:50:36 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/04 09:35:29 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/04 10:22:11 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	render_gradient(t_data *data)
 	int			y;
 	t_vec	color;
 
-	y = HEIGHT;
+	y = data->h;
 	while (--y >= 0)
 	{
 		x = -1;
-		while (++x < WIDTH)
+		while (++x < data->w)
 		{
-			set(&color, r, (double)x / WIDTH);
-			set(&color, g, (double)y / HEIGHT);
+			set(&color, r, (double)x / data->w);
+			set(&color, g, (double)y / data->h);
 			set(&color, b, 0.2);
 
 			put_pixel(data, x, y, create_trgb_vec(&color));

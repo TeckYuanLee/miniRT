@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_math.c                                         :+:      :+:    :+:   */
+/*   hit_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 13:08:13 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/04 09:51:55 by jatan            ###   ########.fr       */
+/*   Created: 2023/01/04 09:28:53 by jatan             #+#    #+#             */
+/*   Updated: 2023/01/04 10:10:18 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include <math.h>
 
-double	length(t_vec vec)
+double	hit_sphere(t_vec center, double rad, t_ray r)
 {
-	return (sqrt(vec.e1 * vec.e1 + vec.e2 * vec.e2 + vec.e3 * vec.e3));
-}
+	t_vec	oc;
+	double	a;
+	double	b;
+	double	c;
+	double	discriminant;
 
-t_vec	unit_vec(t_vec vec)
-{
-	t_vec	ret;
+	oc = v_subtr(r.origin, center);
+	a = dot(r.dir, r.dir);
+	b = 2.0 * dot(oc, r.dir);
+	c = dot(oc, oc) - rad * rad;
+	discriminant = b * b - 4 * a * c;
 
-	ret = v_div_d(vec, length(vec));
-	return (ret);
-}
+	if (discriminant < 0)
+		return (-1.0);
+	else
+		return ((- b - sqrt(discriminant)) / 2.0 * a);
 
-double	dot(t_vec v1, t_vec v2)
-{
-	t_vec	res;
-
-	res = v_multi(v1, v2);
-	return (res.e1 + res.e2 + res.e3);
 }
