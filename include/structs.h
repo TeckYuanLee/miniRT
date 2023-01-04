@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:30:30 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/04 09:36:14 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/04 10:20:31 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,15 +95,17 @@ typedef struct s_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		w;
+	int		h;
 }				t_data;
 
 // nv = normalized vector
 typedef struct s_camera
 {
-	int			init;
+	int		init;
 	t_vec	origin;
 	t_vec	nv;
-	int			fov;
+	int		fov;
 }				t_camera;
 
 typedef struct s_res
