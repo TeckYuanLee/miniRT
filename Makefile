@@ -1,6 +1,6 @@
 NAME = minirt
 
-GCC = gcc -Wall -Wextra -Werror -fsanitize=address -g3
+GCC = gcc -Wall -Wextra -Werror -g
 OS_NAME := $(shell uname -s | tr A-Z a-z)
 VALGRIND = valgrind --leak-check=full \
          --show-leak-kinds=all \
@@ -23,45 +23,67 @@ ifeq ($(OS_NAME), linux)
 	MLXLIB += -L$(MLXDIR) -lmlx -L/usr/lib -I$(MLXDIR) -lXext -lX11 -lm -lz
 endif
 
-FTINC = -Ilibft
-FTLIB = -Llibft -lft
 
-INC = -Iinclude $(FTINC) $(MLXINC)
-LIB = $(MLXLIB) $(FTLIB)
-
-DEPS = include/minirt.h include/objects.h
+INC = -Iinclude -Ilibft $(MLXINC)
+LIB = -Llibft -lft -L. -lminirt $(MLXLIB)
 
 
-SRC =	main.c \
-		$(addprefix src/, \
+TEST_SRC = $(wildcard test/*.c)
+
+SRC :=	$(addprefix src/, render_image.c \
 			$(addprefix hook/, handle_key_release.c) \
-			$(addprefix utils/, put_pixel.c) \
-			$(addprefix vect_utils/, get.c set.c new_vect.c) \
-			$(addprefix test/, render_gradient.c) \
+			$(addprefix utils/, put_pixel.c create_trgb.c render_gradient.c) \
+			$(addprefix vect_utils/, get.c set.c new_vect.c multi_div_sum_subtr.c multi_div_sum_subtr_d.c vec_math.c) \
 		)
 
-
 OBJDIR = obj/
-OBJ = $(SRC:$(notdir %.c)=$(OBJDIR)%.o)
+OBJ := $(SRC:%.c=$(OBJDIR)%.o)
+TEST_OBJ := $(TEST_SRC:%.c=$(OBJDIR)%.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) 
-	$(GCC) $^ $(LIB) -o $@
+$(NAME): main.c libminirt.a
+	@$(GCC) main.c $(INC) $(LIB) -o $@
+	@printf "$(GREEN)$@ is ready to run$(NC)\n"
 
 r : $(NAME)
-	# $(VALGRIND) ./$<
-	./$<
+	@# $(VALGRIND) ./$<
+	@printf "$(PINK) Running $<...$(NC)\n"
+	@./$<
+
+libminirt.a: $(OBJ)
+	@ar rcs $@ $^
+	@printf "\033[0K\r$(GREEN)$@ compile successful!$(NC)\n"
+
+test: $(TEST_OBJ)
+	@$(GCC) $^ $(INC) $(LIB) -o $@exe
+	@./$@exe
+	@rm $@exe
 
 $(OBJDIR)%.o: %.c $(DEPS)
-	mkdir -p $(dir $@)
-	$(GCC) $(INC) -c $< -o $@
+	@mkdir -p $(dir $@)
+	@printf "Compiling $@ \033[0K\r"
+	@$(GCC) $(INC) -c $< -o $@
+
 
 clean:
-	rm -rf $(OBJDIR)
+	@rm -rf $(OBJDIR)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
-	
+
+.PHONY: clean fclean re test
+
+# Colors are great!
+# Formats are greater!
+# https://misc.flogisoft.com/bash/tip_colors_and_formatting
+RED		= \033[31m
+GREEN	= \033[32m
+YELLOW	= \033[033m
+BLUE	= \033[034m
+PINK	= \033[035m
+TEAL	= \033[036m
+WHITE	= \033[037m
+NC	= \033[0m # No Color

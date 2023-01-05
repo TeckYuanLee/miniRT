@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_key_release.c                               :+:      :+:    :+:   */
+/*   create_trgb.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 18:52:19 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/02 13:40:16 by jatan            ###   ########.fr       */
+/*   Created: 2023/01/01 22:03:24 by jatan             #+#    #+#             */
+/*   Updated: 2023/01/01 22:03:32 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <mlx.h>
 
-int	handle_key_release(int keycode, t_data *vars)
+int	create_trgb(int t, int r, int g, int b)
 {
-	printf("keycode: %d\n", keycode);
-	if (keycode == 65307)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		exit(0);
-	}
-	return (0);
+	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+int	create_trgb_vec(t_vector *color)
+{
+	int	t;
+	int	r_val;
+	int	g_val;
+	int	b_val;
+
+	t = 0;
+	r_val = get(color, r) * 255;
+	g_val = get(color, g) * 255;
+	b_val = get(color, b) * 255;
+	return (t << 24 | r_val << 16 | g_val << 8 | b_val);
 }

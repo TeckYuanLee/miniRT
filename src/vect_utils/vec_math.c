@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_key_release.c                               :+:      :+:    :+:   */
+/*   vec_math.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 18:52:19 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/02 13:40:16 by jatan            ###   ########.fr       */
+/*   Created: 2023/01/02 13:08:13 by jatan             #+#    #+#             */
+/*   Updated: 2023/01/03 23:36:38 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <mlx.h>
+#include <math.h>
 
-int	handle_key_release(int keycode, t_data *vars)
+double	length(t_vector vec)
 {
-	printf("keycode: %d\n", keycode);
-	if (keycode == 65307)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		exit(0);
-	}
-	return (0);
+	return (sqrt(vec.e1 * vec.e1 + vec.e2 * vec.e2 + vec.e3 * vec.e3));
+}
+
+t_vector	unit_vector(t_vector vec)
+{
+	t_vector	ret;
+
+	ret = v_div_d(vec, length(vec));
+	return (ret);
 }
