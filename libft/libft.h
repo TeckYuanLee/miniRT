@@ -15,6 +15,8 @@
 # include <stddef.h>
 # include <stdlib.h>
 
+#define	BUFFER_SIZE 1
+
 typedef struct s_list
 {
 	void			*content;

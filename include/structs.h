@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:30:30 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/05 09:40:14 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/05 09:54:54 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,13 @@ typedef struct s_object
 	t_vec			color;
 	struct s_object	*next;
 }				t_object;
+
+typedef struct s_obj
+{
+	char			flag;
+	union u_objects	obj;
+	t_vec			color;
+}				t_obj;
 
 typedef struct s_ray
 {

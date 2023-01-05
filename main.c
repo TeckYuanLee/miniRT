@@ -6,18 +6,26 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:30:39 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/04 10:21:06 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/05 10:32:32 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
-#include "minirt.h"
 #include <stddef.h>
+#include "minirt.h"
+#include "libft.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	t_data	mlx;
+	t_data		mlx;
 
+	if (argc != 2)
+	{
+		ft_putstr_fd("Error: Invalid arguments.\n", 2);
+		return (-1);
+	}
+	// ft_putstr_fd(argv[1], 1);
+	parse_conf_file(argv[1]);
 	mlx.mlx = mlx_init();
 	mlx.w = 600;
 	mlx.h = 300;
