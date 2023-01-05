@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:30:30 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/04 10:20:31 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/05 09:40:14 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,20 @@ typedef struct s_triangle
 typedef struct s_sphere
 {
 	t_vec	center;
-	double		radius;
+	double	radius;
 }				t_sphere;
 
 typedef struct s_cylinder
 {
 	t_vec	center;
-	double		radius;
-	double		height;
+	double	radius;
+	double	height;
 }				t_cylinder;
 
 typedef struct s_square
 {
 	t_vec	center;
-	double		radius;
+	double	radius;
 }				t_square;
 
 // typedef struct s_cube
@@ -76,7 +76,7 @@ typedef struct s_object
 {
 	char			flag;
 	union u_objects	obj;
-	t_vec		color;
+	t_vec			color;
 	struct s_object	*next;
 }				t_object;
 
