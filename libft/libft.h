@@ -15,7 +15,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 
-#define	BUFFER_SIZE 1
+# define BUFFER_SIZE 1
 
 typedef struct s_list
 {
@@ -39,6 +39,7 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *nptr);
+double	ft_atod(const char *str);
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -62,6 +63,8 @@ char	*ft_itoa_uint(unsigned int n);
 char	*ft_itoa_hex(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
+
+void	ft_free_array(char **array);
 
 void	ft_reverse(char *buffer, int i, int j);
 
