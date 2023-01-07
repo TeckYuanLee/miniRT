@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:30:30 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/05 09:54:54 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/07 17:58:07 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ typedef struct s_square
 // }	t_cube;
 
 
+# define CONFIG_ID "sp,pl,cy,A,C,L"
+
+enum e_id {sp, pl, cy, A, C, L};
 union u_objects
 {
 	t_square	sq;
@@ -74,18 +77,11 @@ union u_objects
 //linked list of objects
 typedef struct s_object
 {
-	char			flag;
+	char			id;
 	union u_objects	obj;
 	t_vec			color;
 	struct s_object	*next;
 }				t_object;
-
-typedef struct s_obj
-{
-	char			flag;
-	union u_objects	obj;
-	t_vec			color;
-}				t_obj;
 
 typedef struct s_ray
 {
@@ -109,11 +105,33 @@ typedef struct s_data
 // nv = normalized vector
 typedef struct s_camera
 {
-	int		init;
+	char	init;
 	t_vec	origin;
 	t_vec	nv;
 	int		fov;
 }				t_camera;
+
+typedef struct s_ambient
+{
+	char	init;
+	double	ratio;
+	t_vec	color;
+}				t_ambient;
+
+typedef struct s_light
+{
+	char	init;
+	t_vec	coor;
+	double	ratio;
+	t_vec	color;
+}				t_light;
+
+typedef struct s_scene
+{
+	t_camera	camera;
+	t_ambient	ambient;
+	t_light		light;
+}				t_scene;
 
 typedef struct s_res
 {
