@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 01:01:22 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/05 10:44:22 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/06 11:27:47 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**get_lines_array(int fd)
 	return (ft_split(line, '\n'));
 }
 
-void	create_world(char **line_array)
+void	print_array(char **line_array)
 {
 	while (*line_array)
 	{
@@ -48,7 +48,7 @@ void	create_world(char **line_array)
 	}
 }
 
-t_object	*parse_conf_file(char *filename)
+char	**parse_conf_file(char *filename)
 {
 	int		fd;
 	char	**line_array;
@@ -66,8 +66,8 @@ t_object	*parse_conf_file(char *filename)
 		return (NULL);
 	}
 	line_array = get_lines_array(fd);
-	create_world(line_array);
-	return (NULL);
+	close(fd);
+	return (line_array);
 }
 
 // todo - error handling, check file, read line, split line, check line, make object
