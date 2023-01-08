@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 08:43:26 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/07 18:08:24 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/08 18:26:16 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 t_scene	init_scene(void)
 {
-	t_scene ret;
+	t_scene	ret;
 
 	ret.camera.init = 0;
 	ret.ambient.init = 0;
@@ -41,16 +41,24 @@ void	populate_error(t_list **objects)
  * Errors:
  * - invalid identifier, not enough information, wrong information format
 */
-int	identify(char **identifier, char *line)
+int	identify(char *line)
 {
-	int			i;
+	int		i;
+	char	**identifier;
 
+	identifier = ft_split(CONFIG_ID, ',');
 	i = -1;
 	while (identifier[++i])
 	{
 		if (ft_strncmp(identifier[i], line, ft_strlen(line)) == 0)
+		{
+			ft_free_array(identifier);
+			free(identifier);
 			return (i);
+		}
 	}
+	ft_free_array(identifier);
+	free(identifier);
 	return (-1);
 }
 
@@ -58,14 +66,14 @@ t_create_func	*set_create_funcs(void)
 {
 	t_create_func	*funcs;
 
-	funcs = (t_create_func *)malloc(sizeof(t_create_func) * L + 1);
+	funcs = (t_create_func *)malloc(sizeof(t_create_func) * (L + 1));
 
-	funcs[sp] = NULL;
+	funcs[sp] = create_sp;
 	funcs[pl] = NULL;
 	funcs[cy] = NULL;
-	funcs[A] = NULL;
+	funcs[A] = create_ambient;
 	funcs[C] = create_cam;
-	funcs[L] = NULL;
+	funcs[L] = create_light;
 
 	return (funcs);
 }
@@ -77,25 +85,27 @@ t_create_func	*set_create_funcs(void)
 void	populate_scene(char **conf, t_scene *scene, t_list **objects)
 {
 	char			**line;
-	char			**identifier;
 	int				id;
 	t_create_func	*create_funcs;
 
-	identifier = ft_split(CONFIG_ID, ',');
 	create_funcs = set_create_funcs();
 	*scene = init_scene();
 	while (*conf)
 	{
 		line = ft_split(*conf, ' ');
-		id = identify(identifier, line[0]);
+		id = identify(line[0]);
 		if (id == -1)
 			break ;
-		if (id == C && create_funcs[id](scene, objects, line) == -1)
+		if (create_funcs[id](scene, objects, line) == -1)
+		{
 			populate_error(objects);
+			ft_free_array(line);
+			free(line);
+			break ;
+		}
 		ft_free_array(line);
 		free(line);
 		conf++;
 	}
-	ft_free_array(identifier);
-	free(identifier);
+	free(create_funcs);
 }

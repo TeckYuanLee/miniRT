@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 01:01:22 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/06 11:27:47 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/08 16:29:20 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	**get_lines_array(int fd)
 	char	*tmp;
 	char	*line;
 	char	*prevline;
+	char	**ret;
 
 	line = ft_strdup("");
 	while (1)
@@ -30,12 +31,15 @@ char	**get_lines_array(int fd)
 		if (tmp == NULL)
 			break ;
 		prevline = line;
-		line = ft_strjoin(line, tmp);
+		line = ft_strjoin(prevline, tmp);
 		free(prevline);
+		free(tmp);
 	}
 	if (ft_strlen(line) < 1)
 		return (NULL);
-	return (ft_split(line, '\n'));
+	ret = ft_split(line, '\n');
+	free(line);
+	return (ret);
 }
 
 void	print_array(char **line_array)
