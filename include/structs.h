@@ -6,12 +6,14 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:30:30 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/07 17:58:07 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/08 17:10:33 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+# include "libft.h"
 
 enum e_vec_type {x=0, y=1, z=2, r=0, g=1, b=2};
 typedef struct s_vector
@@ -89,19 +91,6 @@ typedef struct s_ray
 	t_vec	dir;
 }				t_ray;
 
-typedef struct s_data
-{
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		w;
-	int		h;
-}				t_data;
-
 // nv = normalized vector
 typedef struct s_camera
 {
@@ -132,6 +121,27 @@ typedef struct s_scene
 	t_ambient	ambient;
 	t_light		light;
 }				t_scene;
+
+
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
+
+typedef struct s_data
+{
+	void	*mlx;
+	void	*win;
+	t_img	img;
+	int		w;
+	int		h;
+	t_scene	scene;
+	t_list	*objects;
+}				t_data;
 
 typedef struct s_res
 {

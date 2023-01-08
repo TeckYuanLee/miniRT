@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:41:43 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/07 18:20:46 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/08 18:37:22 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_vec	convrt_to_vec(const char *conf)
 	ret.e1 = ft_atod(arr[0]);
 	ret.e2 = ft_atod(arr[1]);
 	ret.e3 = ft_atod(arr[2]);
-	printf("Camera -> x:%f, y:%f, z:%f\n", ret.e1, ret.e2, ret.e3);
+	printf("creating vec x:%f, y:%f, z:%f\n", ret.e1, ret.e2, ret.e3);
 	ft_free_array(arr);
 	free(arr);
 	return (ret);
@@ -39,7 +39,7 @@ t_vec	convrt_to_vec(const char *conf)
  * @brief To check if the string is a correct vector format, "0.0,0.1,0.2"
  *
  * @param conf
- * @return 1 if true, 0 if false
+ * @return 0 if true, 1 if false
  */
 int	is_vec_format(const char *conf)
 {
@@ -53,7 +53,7 @@ int	is_vec_format(const char *conf)
 	ft_free_array(tmp);
 	free(tmp);
 	if (i == 3)
-		return (1);
-	else
 		return (0);
+	else
+		return (1);
 }

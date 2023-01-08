@@ -6,75 +6,28 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 13:10:07 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/07 19:33:36 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/08 18:36:46 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "libft.h"
-
-int	create_cam(t_scene *scene, t_list **objects, char **conf)
-{
-	t_camera	*cam;
-	int			fov;
-
-	(void) objects;
-	cam = &(scene->camera);
-	if (cam->init != 0)
-	{
-		ft_putstr_fd(RED"Error: Have multiple camera config\n"RESET, 2);
-		return (-1);
-	}
-	if (is_vec_format(conf[1]) == 0 && is_vec_format(conf[2]) == 0)
-	{
-		ft_putstr_fd(RED"Error: Camera vectors in wrong format\n"RESET, 2);
-		return (-1);
-	}
-	cam->origin = convrt_to_vec(conf[1]);
-	cam->nv = convrt_to_vec(conf[2]);
-	fov = ft_atoi(conf[3]);
-	if (fov < 0 || fov > 180)
-		return (-1);
-	cam->fov = fov;
-	return (0);
-}
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   create_cam.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 13:10:07 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/07 18:09:40 by jatan            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "minirt.h"
-#include "libft.h"
+#include <stdio.h>
 
 int	create_ambient(t_scene *scene, t_list **objects, char **conf)
 {
-	t_camera	*cam;
-	int			fov;
+	t_ambient	*ambient;
 
 	(void) objects;
-	cam = &(scene->camera);
-	if (cam->init != 0)
-	{
-		ft_putstr_fd(RED"Error: Have multiple camera config\n"RESET, 2);
-		return (-1);
-	}
-	if (is_vec_format(conf[1]) == 0 && is_vec_format(conf[2]) == 0)
-	{
-		ft_putstr_fd(RED"Error: Camera vectors in wrong format\n"RESET, 2);
-		return (-1);
-	}
-	cam->origin = convrt_to_vec(conf[1]);
-	cam->nv = convrt_to_vec(conf[2]);
-	fov = ft_atoi(conf[3]);
-	if (fov < 0 || fov > 180)
-		return (-1);
-	cam->fov = fov;
+	ambient = &(scene->ambient);
+	if (ambient->init != 0)
+		return (error("Have multiple ambient config", -1));
+	ambient->ratio = ft_atod(conf[1]);
+	if (ambient->ratio < 0.0 || ambient->ratio > 1.0)
+		return (error("Ambient ratio not in range [0.0, 1.0]", -1));
+	if (is_vec_format(conf[2]))
+		return (error("Ambient vector in wrong format", -1));
+	ambient->color = v_div_d(convrt_to_vec(conf[2]), 255);
+	ambient->init = 1;
 	return (0);
 }
