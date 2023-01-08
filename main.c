@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:30:39 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/08 17:56:00 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/08 18:42:15 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ int	main(int argc, char **argv)
 
 	mlx_destroy_image(data.mlx, data.img.mlx_img);
 	free(data.mlx);
+	ft_lstclear(&data.objects, free);
 	return (0);
 }
