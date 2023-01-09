@@ -6,12 +6,13 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 08:43:26 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/08 18:26:16 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/09 12:39:08 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "libft.h"
+#include <stdio.h>
 
 t_scene	init_scene(void)
 {
@@ -62,20 +63,29 @@ int	identify(char *line)
 	return (-1);
 }
 
-t_create_func	*set_create_funcs(void)
+// t_crt_func	*set_crt_funcs(void)
+// {
+// 	t_crt_func	*funcs;
+
+// 	funcs = (t_crt_func *)malloc(sizeof(t_crt_func) * (L + 1));
+
+// 	funcs[sp] = create_sp;
+// 	funcs[pl] = NULL;
+// 	funcs[cy] = NULL;
+// 	funcs[A] = create_ambient;
+// 	funcs[C] = create_cam;
+// 	funcs[L] = create_light;
+
+// 	return (funcs);
+// }
+
+void	show_objects(void *content)
 {
-	t_create_func	*funcs;
+	t_object	*obj;
 
-	funcs = (t_create_func *)malloc(sizeof(t_create_func) * (L + 1));
-
-	funcs[sp] = create_sp;
-	funcs[pl] = NULL;
-	funcs[cy] = NULL;
-	funcs[A] = create_ambient;
-	funcs[C] = create_cam;
-	funcs[L] = create_light;
-
-	return (funcs);
+	obj = (t_object *)content;
+	printf("id: %c\t", (obj->id + 48));
+	show_vec(obj->obj.sp.center);
 }
 
 /**
@@ -84,11 +94,11 @@ t_create_func	*set_create_funcs(void)
 */
 void	populate_scene(char **conf, t_scene *scene, t_list **objects)
 {
-	char			**line;
-	int				id;
-	t_create_func	*create_funcs;
+	char		**line;
+	int			id;
+	t_crt_func	*create_funcs;
 
-	create_funcs = set_create_funcs();
+	create_funcs = set_crt_funcs();
 	*scene = init_scene();
 	while (*conf)
 	{
@@ -107,5 +117,6 @@ void	populate_scene(char **conf, t_scene *scene, t_list **objects)
 		free(line);
 		conf++;
 	}
+	ft_lstiter(*objects, show_objects);
 	free(create_funcs);
 }
