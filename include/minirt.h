@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 12:32:10 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/08 13:48:18 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/09 12:21:36 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "libft.h"
 # include "styling.h"
 
-typedef int	(*t_create_func)(t_scene *, t_list **, char **);
+typedef int	(*t_crt_func)(t_scene *, t_list **, char **);
 
 void		render_gradient(t_data *data);
 void		render_image(t_data *data, t_object *objects);
@@ -26,12 +26,8 @@ void		populate_scene(char **conf, t_scene *scene, t_list **objects);
 
 t_vec		convrt_to_vec(const char *conf);
 int			is_vec_format(const char *conf);
-int			create_cam(t_scene *scene, t_list **objects, char **conf);
-int			create_ambient(t_scene *scene, t_list **objects, char **conf);
-int			create_light(t_scene *scene, t_list **objects, char **conf);
-int			create_sp(t_scene *scene, t_list **objects, char **conf);
-int			create_cy(t_scene *scene, t_list **objects, char **conf);
-int			create_pl(t_scene *scene, t_list **objects, char **conf);
+t_crt_func	*set_crt_funcs(void);
+
 
 int			create_trgb(int t, int r, int g, int b);
 int			create_trgb_vec(t_vec *color);
@@ -41,9 +37,11 @@ char		*get_next_line(int fd);
 
 int			error(char *message, int err_code);
 
+// ----- VECTOR UTILS AND MATHS -----
 double		get(t_vec *vec, enum e_vec_type c);
 void		set(t_vec *vec, enum e_vec_type c, double value);
 t_vec		new_vect(double e1, double e2, double e3);
+void		show_vec(t_vec vec);
 
 t_vec		v_multi(t_vec vec1, t_vec vec2);
 t_vec		v_div(t_vec vec1, t_vec vec2);
