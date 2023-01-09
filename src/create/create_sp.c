@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 20:00:54 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/08 18:12:13 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/09 12:28:47 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 // * x,y,z coordinates of the sphere center: 0.0,0.0,20.6
 // * the sphere diameter: 12.6
 // * R,G,B colors in range [0-255]: 10, 0, 255
+
+
 
 int	create_sp(t_scene *scene, t_list **objects, char **conf)
 {
