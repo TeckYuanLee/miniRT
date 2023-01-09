@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 08:43:26 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/09 12:39:08 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/09 12:47:19 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,21 +63,6 @@ int	identify(char *line)
 	return (-1);
 }
 
-// t_crt_func	*set_crt_funcs(void)
-// {
-// 	t_crt_func	*funcs;
-
-// 	funcs = (t_crt_func *)malloc(sizeof(t_crt_func) * (L + 1));
-
-// 	funcs[sp] = create_sp;
-// 	funcs[pl] = NULL;
-// 	funcs[cy] = NULL;
-// 	funcs[A] = create_ambient;
-// 	funcs[C] = create_cam;
-// 	funcs[L] = create_light;
-
-// 	return (funcs);
-// }
 
 void	show_objects(void *content)
 {
