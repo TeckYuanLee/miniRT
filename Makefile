@@ -6,7 +6,7 @@ VALGRIND = valgrind --leak-check=full \
          --show-leak-kinds=all \
          --verbose \
          --log-file=valgrind-out.txt \
-        #  --track-origins=yes \
+         --track-origins=yes \
 
 MLXDIR = mlx/mlx-$(OS_NAME)
 MLXINC :=
