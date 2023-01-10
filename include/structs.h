@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:30:30 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/08 17:10:33 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/10 12:12:06 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 
 enum e_vec_type {x=0, y=1, z=2, r=0, g=1, b=2};
+
 typedef struct s_vector
 {
 	double	e1;
@@ -98,6 +99,9 @@ typedef struct s_camera
 	t_vec	origin;
 	t_vec	nv;
 	int		fov;
+	t_vec	lower_left_corner;
+	t_vec	horizontal;
+	t_vec	vertical;
 }				t_camera;
 
 typedef struct s_ambient
@@ -149,5 +153,12 @@ typedef struct s_res
 	int	xres;
 	int	yres;
 }				t_res;
+
+typedef struct s_hit_rec {
+	t_vec	p;
+	t_vec	normal;
+	double	t;
+	char	hit;
+}				t_hit_rec;
 
 #endif
