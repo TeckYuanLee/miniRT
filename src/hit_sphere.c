@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set.c                                              :+:      :+:    :+:   */
+/*   hit_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 19:31:27 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/04 09:35:29 by jatan            ###   ########.fr       */
+/*   Created: 2023/01/04 09:28:53 by jatan             #+#    #+#             */
+/*   Updated: 2023/01/04 10:10:18 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include <math.h>
 
-void	set(t_vec *vec, enum e_vec_type c, double value)
+double	hit_sphere(t_vec center, double rad, t_ray r)
 {
-	if (c == 0)
-		vec->e1 = value;
-	else if (c == 1)
-		vec->e2 = value;
-	else if (c == 2)
-		vec->e3 = value;
+	t_vec	oc;
+	double	a;
+	double	b;
+	double	c;
+	double	discriminant;
+
+	oc = v_subtr(r.origin, center);
+	a = dot(r.dir, r.dir);
+	b = 2.0 * dot(oc, r.dir);
+	c = dot(oc, oc) - rad * rad;
+	discriminant = b * b - 4 * a * c;
+
+	if (discriminant < 0)
+		return (-1.0);
 	else
-		return;
+		return ((- b - sqrt(discriminant)) / 2.0 * a);
+
 }

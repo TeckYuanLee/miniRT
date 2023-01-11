@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 22:03:24 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/01 22:03:32 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/04 09:35:29 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-int	create_trgb_vec(t_vector *color)
+int	create_trgb_vec(t_vec *color)
 {
 	int	t;
 	int	r_val;

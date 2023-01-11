@@ -6,15 +6,15 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:20:57 by jatan             #+#    #+#             */
-/*   Updated: 2022/12/30 22:20:57 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/04 09:35:29 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vector	new_vect(double e1, double e2, double e3)
+t_vec	new_vect(double e1, double e2, double e3)
 {
-	t_vector	ret;
+	t_vec	ret;
 
 	ret.e1 = e1;
 	ret.e2 = e2;

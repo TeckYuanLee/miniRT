@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:30:30 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/01 22:15:59 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/04 10:20:31 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,44 +20,44 @@ typedef struct s_vector
 	double	e2;
 	double	e3;
 	double	e4;
-}				t_vector;
+}				t_vec;
 
 typedef struct s_plane
 {
-	t_vector	coor;
-	t_vector	orientation;
+	t_vec	coor;
+	t_vec	orientation;
 }				t_plane;
 
 typedef struct s_triangle
 {
-	t_vector	pt_one;
-	t_vector	pt_two;
-	t_vector	pt_three;
+	t_vec	pt_one;
+	t_vec	pt_two;
+	t_vec	pt_three;
 }				t_triangle;
 
 typedef struct s_sphere
 {
-	t_vector	center;
+	t_vec	center;
 	double		radius;
 }				t_sphere;
 
 typedef struct s_cylinder
 {
-	t_vector	center;
+	t_vec	center;
 	double		radius;
 	double		height;
 }				t_cylinder;
 
 typedef struct s_square
 {
-	t_vector	center;
+	t_vec	center;
 	double		radius;
 }				t_square;
 
 // typedef struct s_cube
 // {
 // 	union u_objects	sq;
-// 	t_vector		center;
+// 	t_vec		center;
 // }	t_cube;
 
 
@@ -76,14 +76,14 @@ typedef struct s_object
 {
 	char			flag;
 	union u_objects	obj;
-	t_vector		color;
+	t_vec		color;
 	struct s_object	*next;
 }				t_object;
 
 typedef struct s_ray
 {
-	t_vector	origin;
-	t_vector	dir;
+	t_vec	origin;
+	t_vec	dir;
 }				t_ray;
 
 typedef struct s_data
@@ -95,15 +95,17 @@ typedef struct s_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		w;
+	int		h;
 }				t_data;
 
 // nv = normalized vector
 typedef struct s_camera
 {
-	int			init;
-	t_vector	origin;
-	t_vector	nv;
-	int			fov;
+	int		init;
+	t_vec	origin;
+	t_vec	nv;
+	int		fov;
 }				t_camera;
 
 typedef struct s_res

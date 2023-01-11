@@ -30,7 +30,7 @@ LIB = -Llibft -lft -L. -lminirt $(MLXLIB)
 
 TEST_SRC = $(wildcard test/*.c)
 
-SRC :=	$(addprefix src/, render_image.c \
+SRC :=	$(addprefix src/, render_image.c hit_sphere.c point_at_parameter.c \
 			$(addprefix hook/, handle_key_release.c) \
 			$(addprefix utils/, put_pixel.c create_trgb.c render_gradient.c) \
 			$(addprefix vect_utils/, get.c set.c new_vect.c multi_div_sum_subtr.c multi_div_sum_subtr_d.c vec_math.c) \

@@ -12,22 +12,22 @@
 
 #include "minirt.h"
 
-t_vector	v_multi(t_vector vec1, t_vector vec2)
+t_vec	v_multi(t_vec vec1, t_vec vec2)
 {
 	return (new_vect(vec1.e1 * vec2.e1, vec1.e2 * vec2.e2, vec1.e3 * vec2.e3));
 }
 
-t_vector	v_div(t_vector vec1, t_vector vec2)
+t_vec	v_div(t_vec vec1, t_vec vec2)
 {
 	return (new_vect(vec1.e1 / vec2.e1, vec1.e2 / vec2.e2, vec1.e3 / vec2.e3));
 }
 
-t_vector	v_sum(t_vector vec1, t_vector vec2)
+t_vec	v_sum(t_vec vec1, t_vec vec2)
 {
 	return (new_vect(vec1.e1 + vec2.e1, vec1.e2 + vec2.e2, vec1.e3 + vec2.e3));
 }
 
-t_vector	v_subtr(t_vector vec1, t_vector vec2)
+t_vec	v_subtr(t_vec vec1, t_vec vec2)
 {
 	return (new_vect(vec1.e1 - vec2.e1, vec1.e2 - vec2.e2, vec1.e3 - vec2.e3));
 }

@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set.c                                              :+:      :+:    :+:   */
+/*   point_at_parameter.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 19:31:27 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/04 09:35:29 by jatan            ###   ########.fr       */
+/*   Created: 2023/01/04 10:00:56 by jatan             #+#    #+#             */
+/*   Updated: 2023/01/04 10:02:47 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "minirt.h"
 
-void	set(t_vec *vec, enum e_vec_type c, double value)
+t_vec	point_at_parameter(t_ray ray, double t)
 {
-	if (c == 0)
-		vec->e1 = value;
-	else if (c == 1)
-		vec->e2 = value;
-	else if (c == 2)
-		vec->e3 = value;
-	else
-		return;
+	return (v_sum(ray.origin, v_multi_d(ray.dir, t)));
 }
