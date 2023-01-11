@@ -30,6 +30,7 @@ LIB =  -L. -lminirt $(MLXLIB) -Llibft -lft
 
 TEST_SRC = $(wildcard test/*.c)
 
+# Put your src directory here
 SRC_DIRS = src src/hook src/utils src/vec_utils src/create src/hit
 SRC = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 
