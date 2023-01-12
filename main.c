@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:30:39 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/11 18:03:49 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/12 16:03:20 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	render(t_data *data)
 		return (1);
 	render_image(data, &data->scene, data->objects);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
-	ft_putstr_fd("Rendered image and putted image to window...\n", 1);
+	ft_putstr_fd("> !! - Rendered image and putted image to window...\n", 1);
 	return (0);
 }
 
@@ -72,6 +72,7 @@ int	main(int argc, char **argv)
 	mlx_loop(data.mlx);
 
 	mlx_destroy_image(data.mlx, data.img.mlx_img);
+	printf("Window closed\n");
 	free(data.mlx);
 	ft_lstclear(&data.objects, free);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 20:55:54 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/10 13:10:21 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/12 16:10:14 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <limits.h>
 
-int	get_hit_from_objects(t_ray *r, t_list *objects, t_hit_rec *rec)
+int	get_hit_from_objects(t_ray r, t_list *objects, t_hit_rec *rec)
 {
 	t_hit_rec	tmp_rec;
 	double		closest;
@@ -33,20 +33,25 @@ int	get_hit_from_objects(t_ray *r, t_list *objects, t_hit_rec *rec)
 	return (rec->hit);
 }
 
-t_vec	calc_color(t_ray *ray, t_list *objects)
+t_vec	calc_color(t_ray ray, t_list *objects, int depth)
 {
 	t_hit_rec	rec;
 	t_vec		unit_dir;
 	double		t;
+	t_ray		new_ray;
 
+	if (depth <= 0)
+		return ((t_vec){0, 0, 0, 0});
 	if (get_hit_from_objects(ray, objects, &rec) == 1)
 	{
-		return (v_multi_d((t_vec){get(&rec.normal, x) + 1,
-				get(&rec.normal, y) + 1, get(&rec.normal, z) + 1, 0}, 0.5));
+		new_ray.dir = v_subtr(v_sum(rec.p, v_sum(rec.normal,
+						random_in_unit_sphere(rec.p))), rec.p);
+		new_ray.origin = rec.p;
+		return (v_multi_d(calc_color(new_ray, objects, depth - 1), 0.5));
 	}
 	else
 	{
-		unit_dir = unit_vec(ray->dir);
+		unit_dir = unit_vec(ray.dir);
 		t = 0.5 * (get(&unit_dir, y) + 1.0);
 		return (v_sum(v_multi_d((t_vec){0.3, 0.5, 1.0, 0}, (1.0 - t)),
 			v_multi_d((t_vec){1.0, 1.0, 1.0, 0}, t)));
@@ -85,15 +90,17 @@ void	render_image(t_data *data, t_scene *scene, t_list *objects)
 	scene->camera.horizontal = new_vect(4.0, 0.0, 0.0);
 	scene->camera.vertical = new_vect(0.0, 2.0, 0.0);
 	j = data->h;
+	ft_putstr_fd("> Starting ray trace......\n", 1);
 	while (--j >= 0)
 	{
 		i = -1;
 		while (++i < data->w)
 		{
+			printf("> Tracing x:%d, y:%d\n", i, j);
 			ray = camera_get_ray(
 					&scene->camera, (double)i / data->w, (double)j / data->h);
-			color = calc_color(&ray, objects);
-			put_pixel(data, i, j, create_trgb_vec(&color));
+			color = calc_color(ray, objects, 50);
+			put_pixel(&data->img, i, j, create_trgb_vec(&color));
 		}
 	}
 }
