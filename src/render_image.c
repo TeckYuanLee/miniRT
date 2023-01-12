@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 20:55:54 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/12 23:10:30 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/13 00:54:46 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,16 @@
 
 // Was getting a black screen after adding diffuse, bug caused by not
 // initializing record hit to false.
-
+/**
+ * @brief Find the closest hit to object from ray. If hit, the hit rec is
+ * updated with the closet hit object information and pass that back for
+ * calculation.
+ *
+ * @param r the ray
+ * @param objects the linked list of objects to iterate
+ * @param rec the record to be updated
+ * @return int 1 if hits, 0 if nothing hits
+ */
 int	get_hit_from_objects(t_ray r, t_list *objects, t_hit_rec *rec)
 {
 	t_hit_rec	tmp_rec;
@@ -26,7 +35,8 @@ int	get_hit_from_objects(t_ray r, t_list *objects, t_hit_rec *rec)
 	rec->hit = 0;
 	while (objects)
 	{
-		tmp_rec = run_hit_funcs(r, 0.001, closest, (t_object *)objects->content);
+		tmp_rec = run_hit_funcs(r, 0.001,
+				closest, (t_object *)objects->content);
 		if (tmp_rec.hit == 1)
 		{
 			closest = tmp_rec.t;
@@ -37,13 +47,16 @@ int	get_hit_from_objects(t_ray r, t_list *objects, t_hit_rec *rec)
 	return (rec->hit);
 }
 
-t_vec	get_target(t_hit_rec rec)
-{
-	// rand_d(rec.normal.e1 + 1);
-	// show_vec(v_sum(rec.p, v_sum(rec.normal, random_in_unit_sphere())));
-	return (v_sum(rec.p, v_sum(rec.normal, random_in_unit_sphere())));
-}
-
+/**
+ * @brief This is the fucntion that do most of the calculation for the ray. If
+ * the ray hits something, it will scattered by calling itself again (have a
+ * depth for recursion limit). If not, it will return a color from the plane.
+ *
+ * @param ray the ray to trace
+ * @param objects the linked list of objects to iterate
+ * @param depth recursion limit
+ * @return t_vec the result color
+ */
 t_vec	calc_color(t_ray ray, t_list *objects, int depth)
 {
 	t_hit_rec	rec;
@@ -56,7 +69,8 @@ t_vec	calc_color(t_ray ray, t_list *objects, int depth)
 	if (get_hit_from_objects(ray, objects, &rec) == 1)
 	{
 		new_ray.origin = rec.p;
-		new_ray.dir = v_subtr(get_target(rec), rec.p);
+		new_ray.dir = v_subtr(v_sum(rec.p,
+					v_sum(rec.normal, random_in_unit_sphere())), rec.p);
 		return (v_multi_d(calc_color(new_ray, objects, depth - 1), 0.5));
 	}
 	else
@@ -68,7 +82,15 @@ t_vec	calc_color(t_ray ray, t_list *objects, int depth)
 	}
 }
 
-
+/**
+ * @brief Get ray from camera to world using the settings and
+ * pixel offset [u, v].
+ *
+ * @param cam
+ * @param u
+ * @param v
+ * @return t_ray
+ */
 t_ray	camera_get_ray(t_camera *cam, double u, double v)
 {
 	t_ray	ray;
@@ -80,6 +102,17 @@ t_ray	camera_get_ray(t_camera *cam, double u, double v)
 	return (ray);
 }
 
+/**
+ * @brief This anti alias work by sending random ray in a single pixel for a
+ * total N times. Then sum all the ray color and get the average. (I think
+ * this method is called distribution ray tracing)
+ *
+ * @param i
+ * @param j
+ * @param data The data strcut to get camera, width and height
+ * @param ns number of samples
+ * @return t_vec
+ */
 t_vec	anti_alias_color(int i, int j, t_data *data, int ns)
 {
 	t_ray	ray;
@@ -96,16 +129,16 @@ t_vec	anti_alias_color(int i, int j, t_data *data, int ns)
 				(double)(j + rand_d(0)) / data->h);
 		color = v_sum(color, calc_color(ray, data->objects, ns));
 	}
-	return (color);
+	return (v_div_d(color, ns));
 }
 
 /**
- * for each pixel,
- * compute the primary ray,
- * check for intersections, get the closest one,
- * calc shadow ray (not yet)
- * render
- *
+ * For each pixel {
+ * 	compute the primary ray,
+ * 	check for intersections, get the closest one,
+ * 	calc shadow ray (not yet)
+ * 	render
+ * }
 */
 void	render_image(t_data *data)
 {
@@ -126,8 +159,6 @@ void	render_image(t_data *data)
 		while (++i < data->w)
 		{
 			color = anti_alias_color(i, j, data, ns);
-			// show_vec(color);
-			color = v_div_d(color, ns);
 			put_pixel(&data->img, i, j, create_trgb_vec(&color));
 		}
 	}
