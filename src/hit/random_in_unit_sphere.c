@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:23:06 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/12 16:36:22 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/12 22:53:26 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,21 @@
  * @param vec any random vec with random value
  * @return t_vec
  */
-t_vec	random_in_unit_sphere(t_vec vec)
+t_vec	random_in_unit_sphere(void)
 {
 	t_vec	p;
+	t_vec	tmp;
 
-	p = vec;
 	while (1)
 	{
-		p = (t_vec){rand_d(p.e1 * 100, -1, 1),
-			rand_d(p.e2 * 100, -1, 1), rand_d(p.e3 * 100, -1, 1), 0};
-		if (length_squared(p) < 1)
-			return (p);
+		tmp = (t_vec){rand_d(0), rand_d(0), rand_d(0), 0};
+		// show_vec(tmp);
+		p = v_subtr(v_multi_d(tmp, 2.0), (t_vec){1, 1, 1, 0});
+		// printf("%f\n", length_squared(p));
+		if (length_squared(p) >= 1.0)
+			continue ;
+		// show_vec(p);
+		return (p);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 20:55:54 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/12 17:51:40 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/12 23:10:30 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 #include <stdio.h>
 #include <limits.h>
 
+// Was getting a black screen after adding diffuse, bug caused by not
+// initializing record hit to false.
+
 int	get_hit_from_objects(t_ray r, t_list *objects, t_hit_rec *rec)
 {
 	t_hit_rec	tmp_rec;
 	double		closest;
 
 	closest = __DBL_MAX__;
+	rec->hit = 0;
 	while (objects)
 	{
-		tmp_rec = run_hit_funcs(r, 0.0, closest, (t_object *)objects->content);
+		tmp_rec = run_hit_funcs(r, 0.001, closest, (t_object *)objects->content);
 		if (tmp_rec.hit == 1)
 		{
 			closest = tmp_rec.t;
@@ -31,6 +35,13 @@ int	get_hit_from_objects(t_ray r, t_list *objects, t_hit_rec *rec)
 		objects = objects->next;
 	}
 	return (rec->hit);
+}
+
+t_vec	get_target(t_hit_rec rec)
+{
+	// rand_d(rec.normal.e1 + 1);
+	// show_vec(v_sum(rec.p, v_sum(rec.normal, random_in_unit_sphere())));
+	return (v_sum(rec.p, v_sum(rec.normal, random_in_unit_sphere())));
 }
 
 t_vec	calc_color(t_ray ray, t_list *objects, int depth)
@@ -44,11 +55,8 @@ t_vec	calc_color(t_ray ray, t_list *objects, int depth)
 		return ((t_vec){0, 0, 0, 0});
 	if (get_hit_from_objects(ray, objects, &rec) == 1)
 	{
-		// printf("> Calculating target...\n");
-		// show_vec(rec.p);
-		new_ray.dir = v_subtr(v_sum(rec.p, v_sum(rec.normal,
-						random_in_unit_sphere(rec.p))), rec.p);
 		new_ray.origin = rec.p;
+		new_ray.dir = v_subtr(get_target(rec), rec.p);
 		return (v_multi_d(calc_color(new_ray, objects, depth - 1), 0.5));
 	}
 	else
@@ -72,6 +80,25 @@ t_ray	camera_get_ray(t_camera *cam, double u, double v)
 	return (ray);
 }
 
+t_vec	anti_alias_color(int i, int j, t_data *data, int ns)
+{
+	t_ray	ray;
+	t_vec	color;
+	int		c;
+
+	c = -1;
+	color = (t_vec){0, 0, 0, 0};
+	while (++c < ns)
+	{
+		ray = camera_get_ray(
+				&data->scene.camera,
+				(double)(i + rand_d(0)) / data->w,
+				(double)(j + rand_d(0)) / data->h);
+		color = v_sum(color, calc_color(ray, data->objects, ns));
+	}
+	return (color);
+}
+
 /**
  * for each pixel,
  * compute the primary ray,
@@ -80,17 +107,17 @@ t_ray	camera_get_ray(t_camera *cam, double u, double v)
  * render
  *
 */
-void	render_image(t_data *data, t_scene *scene, t_list *objects)
+void	render_image(t_data *data)
 {
-	t_ray	ray;
 	int		i;
 	int		j;
 	t_vec	color;
+	int		ns;
 
-	(void) objects;
-	scene->camera.lower_left_corner = new_vect(-2.0, -1.0, -1.0);
-	scene->camera.horizontal = new_vect(4.0, 0.0, 0.0);
-	scene->camera.vertical = new_vect(0.0, 2.0, 0.0);
+	ns = 50;
+	data->scene.camera.lower_left_corner = new_vect(-2.0, -1.0, -1.0);
+	data->scene.camera.horizontal = new_vect(4.0, 0.0, 0.0);
+	data->scene.camera.vertical = new_vect(0.0, 2.0, 0.0);
 	j = data->h;
 	ft_putstr_fd("> Starting ray trace......\n", 1);
 	while (--j >= 0)
@@ -98,9 +125,9 @@ void	render_image(t_data *data, t_scene *scene, t_list *objects)
 		i = -1;
 		while (++i < data->w)
 		{
-			ray = camera_get_ray(
-					&scene->camera, (double)i / data->w, (double)j / data->h);
-			color = calc_color(ray, objects, 50);
+			color = anti_alias_color(i, j, data, ns);
+			// show_vec(color);
+			color = v_div_d(color, ns);
 			put_pixel(&data->img, i, j, create_trgb_vec(&color));
 		}
 	}

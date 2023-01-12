@@ -14,7 +14,7 @@
 
 t_vec	v_multi_d(t_vec vec1, double d)
 {
-	return (new_vect(vec1.e1 * d, vec1.e2 * d, vec1.e3 * d));
+	return (new_vect(d * vec1.e1, d * vec1.e2, d * vec1.e3));
 }
 
 t_vec	v_div_d(t_vec vec1, double d)

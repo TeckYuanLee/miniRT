@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 18:52:19 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/12 16:04:38 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/12 17:55:42 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	handle_key_release(int keycode, t_data *vars)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
 		vars->win = NULL;
+		ft_lstclear(&vars->objects, free);
+		exit(0);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:14:49 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/12 17:45:06 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/12 19:44:11 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,16 @@
 #include <stdio.h>
 
 // x0=seed; a=multiplier; b=increment; m=modulus;
-double	rand_d(int pseed, double min, double max)
+double	rand_d(int pseed)
 {
-	static int	seed;
+	static long	seed;
 	// int			mod;
 	// double		scaled_random;
 
-	(void)pseed;
-	(void)min;
-	(void)max;
-	// if (seed < 0)
-	// 	prev_seed = seed * -1;
-	// else
-	// 	prev_seed = seed;
+	if (pseed != 0)
+		seed = pseed;
+	if (seed == 0)
+		seed = 1;
 	// mod = prev_seed + 42;
 	// prev_seed = (42 * prev_seed + 42) % mod;
 	// prev_seed = (0x5DEECE66DL * prev_seed + 0xBL) & ((1L << 48) - 1);
