@@ -6,14 +6,14 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:56:44 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/10 12:42:51 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/12 15:25:25 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hit.h"
 #include <stdlib.h>
 
-t_hit_rec	run_hit_funcs(t_ray *r, double min, double max, t_object *obj)
+t_hit_rec	run_hit_funcs(t_ray r, double min, double max, t_object *obj)
 {
 	t_hit_func	funcs[3];
 

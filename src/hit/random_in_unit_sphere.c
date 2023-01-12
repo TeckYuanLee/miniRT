@@ -6,12 +6,19 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:23:06 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/12 14:34:13 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/12 16:36:22 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include <stdio.h>
 
+/**
+ * @brief
+ *
+ * @param vec any random vec with random value
+ * @return t_vec
+ */
 t_vec	random_in_unit_sphere(t_vec vec)
 {
 	t_vec	p;
@@ -21,9 +28,8 @@ t_vec	random_in_unit_sphere(t_vec vec)
 	{
 		p = (t_vec){rand_d(p.e1 * 100, -1, 1),
 			rand_d(p.e2 * 100, -1, 1), rand_d(p.e3 * 100, -1, 1), 0};
-		if (length_squared(p) >= 1)
-			continue ;
-		return (p);
+		if (length_squared(p) < 1)
+			return (p);
 	}
 }
 

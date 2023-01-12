@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 20:55:54 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/12 16:10:14 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/12 17:51:40 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ t_vec	calc_color(t_ray ray, t_list *objects, int depth)
 		return ((t_vec){0, 0, 0, 0});
 	if (get_hit_from_objects(ray, objects, &rec) == 1)
 	{
+		// printf("> Calculating target...\n");
+		// show_vec(rec.p);
 		new_ray.dir = v_subtr(v_sum(rec.p, v_sum(rec.normal,
 						random_in_unit_sphere(rec.p))), rec.p);
 		new_ray.origin = rec.p;
@@ -96,7 +98,6 @@ void	render_image(t_data *data, t_scene *scene, t_list *objects)
 		i = -1;
 		while (++i < data->w)
 		{
-			printf("> Tracing x:%d, y:%d\n", i, j);
 			ray = camera_get_ray(
 					&scene->camera, (double)i / data->w, (double)j / data->h);
 			color = calc_color(ray, objects, 50);

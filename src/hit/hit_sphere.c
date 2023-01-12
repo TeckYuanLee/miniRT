@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 09:28:53 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/10 13:21:05 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/12 15:24:43 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@
  * @param sp
  * @return t_sp_math
  */
-t_sp_math	calc_math(t_ray *r, t_sphere sp)
+t_sp_math	calc_math(t_ray r, t_sphere sp)
 {
 	t_sp_math	m;
 
-	m.oc = v_subtr(r->origin, sp.center);
-	m.a = dot(r->dir, r->dir);
-	m.b = dot(m.oc, r->dir);
+	m.oc = v_subtr(r.origin, sp.center);
+	m.a = dot(r.dir, r.dir);
+	m.b = dot(m.oc, r.dir);
 	m.c = dot(m.oc, m.oc) - sp.radius * sp.radius;
 	m.discriminant = m.b * m.b - m.a * m.c;
 	return (m);
 }
 
-t_hit_rec	hit_spherev2(t_ray *r, double min, double max, t_object *obj)
+t_hit_rec	hit_spherev2(t_ray r, double min, double max, t_object *obj)
 {
 	t_sphere	sp;
 	t_sp_math	m;
@@ -57,7 +57,7 @@ t_hit_rec	hit_spherev2(t_ray *r, double min, double max, t_object *obj)
 			}
 		}
 		rec.t = tmp;
-		rec.p = point_at_parameter(*r, rec.t);
+		rec.p = point_at_parameter(r, rec.t);
 		rec.normal = v_div_d(v_subtr(rec.p, sp.center), sp.radius);
 		rec.hit = 1;
 	}
