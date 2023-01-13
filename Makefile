@@ -20,18 +20,18 @@ endif
 
 ifeq ($(OS_NAME), linux)
 	MLXINC += -I/usr/include -I$(MLXDIR) -O3
-	MLXLIB += -L$(MLXDIR) -lmlx -L/usr/lib -I$(MLXDIR) -lXext -lX11 -lm -lz
+	MLXLIB += -L$(MLXDIR) -lmlx -L/usr/lib -I$(MLXDIR) -lXext -lX11 -lm #-lz
 endif
 
 
 INC = -Iinclude -Ilibft $(MLXINC)
-LIB =  -L. -lminirt $(MLXLIB) -Llibft -lft
+LIB =  -L. -lminirt $(MLXLIB) -Llibft #-lft
 
 
 TEST_SRC = $(wildcard test/*.c)
 
 # Put your src directory here
-SRC_DIRS = src src/hook src/utils src/vec_utils src/create src/hit
+SRC_DIRS = src src/hook src/utils src/vec_utils src/create src/hit src/render
 SRC = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 
 # SRC :=	$(addprefix src/, \

@@ -82,7 +82,8 @@ typedef struct s_object
 {
 	char			id;
 	union u_objects	obj;
-	t_vec			color;
+	int				color;
+	t_vec			normal;
 	struct s_object	*next;
 }				t_object;
 
@@ -108,29 +109,31 @@ typedef struct s_ambient
 {
 	char	init;
 	double	ratio;
-	t_vec	color;
+	int		color;
 }				t_ambient;
 
 typedef struct s_light
 {
-	char	init;
-	t_vec	coor;
-	double	ratio;
-	t_vec	color;
+	char			init;
+	t_vec			coor;
+	double			ratio;
+	int				color;
+	struct s_light	*next;
 }				t_light;
 
 typedef struct s_scene
 {
 	t_camera	camera;
 	t_ambient	ambient;
-	t_light		light;
+	t_light		*light;
+	int			background;
 }				t_scene;
 
 
 typedef struct s_img
 {
 	void	*mlx_img;
-	char	*addr;
+	int		*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -138,6 +141,8 @@ typedef struct s_img
 
 typedef struct s_data
 {
+	int		xres;
+	int		yres;
 	void	*mlx;
 	void	*win;
 	t_img	img;
@@ -153,6 +158,13 @@ typedef struct s_res
 	int	xres;
 	int	yres;
 }				t_res;
+
+typedef struct  s_itsxn
+{
+	int    color;
+	t_vec  normal;
+	t_vec  point;
+}               t_itsxn;
 
 typedef struct s_hit_rec {
 	t_vec	p;

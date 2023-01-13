@@ -22,11 +22,11 @@ void	init_data(t_data *data)
 
 	aspect_ratio = 16.0 / 9.0;
 	data->mlx = mlx_init();
-	data->w = 600;
-	data->h = data->w / aspect_ratio;
-	data->win = mlx_new_window(data->mlx, data->w, data->h, "miniRT");
-	data->img.mlx_img = mlx_new_image(data->mlx, data->w, data->h);
-	data->img.addr = mlx_get_data_addr(data->img.mlx_img,
+	data->xres = 600;
+	data->yres = data->xres / aspect_ratio;
+	data->win = mlx_new_window(data->mlx, data->xres, data->yres, "miniRT");
+	data->img.mlx_img = mlx_new_image(data->mlx, data->xres, data->yres);
+	data->img.addr = (int *)mlx_get_data_addr(data->img.mlx_img,
 			&data->img.bits_per_pixel, &data->img.line_length,
 			&data->img.endian);
 }
@@ -39,12 +39,13 @@ void	init_data(t_data *data)
  * @param data
  * @return int
  */
-int	render(t_data *data)
+int	render(t_data data)
 {
-	if (data->win == NULL)
+	if (data.win == NULL)
 		return (1);
-	render_image(data, &data->scene, data->objects);
-	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
+	render_image(data, &data->scene, data.objects);
+	render_scene(data);
+	mlx_put_image_to_window(data.mlx, data.win, data.img.mlx_img, 0, 0);
 	ft_putstr_fd("Rendered image and putted image to window...\n", 1);
 	return (0);
 }
@@ -66,7 +67,7 @@ int	main(int argc, char **argv)
 	free(configs);
 	init_data(&data);
 
-	render(&data);
+	render(data);
 	mlx_hook(data.win, 3, 1L << 1, handle_key_release, &data);
 
 	mlx_loop(data.mlx);
