@@ -13,7 +13,7 @@
 #include <mlx.h>
 #include <stddef.h>
 #include "minirt.h"
-#include "libft.h"
+// #include "libft.h"
 #include <stdio.h>
 
 void	init_data(t_data *data)
@@ -43,7 +43,7 @@ int	render(t_data data)
 {
 	if (data.win == NULL)
 		return (1);
-	render_image(data, &data->scene, data.objects);
+	// render_image(data, &data->scene, data.objects);
 	render_scene(data);
 	mlx_put_image_to_window(data.mlx, data.win, data.img.mlx_img, 0, 0);
 	ft_putstr_fd("Rendered image and putted image to window...\n", 1);
@@ -63,10 +63,10 @@ int	main(int argc, char **argv)
 	data.objects = NULL;
 	configs = parse_conf_file(argv[1]);
 	populate_scene(configs, &data.scene, &data.objects);
+	printf("hmm?\n");
 	ft_free_array(configs);
 	free(configs);
 	init_data(&data);
-
 	render(data);
 	mlx_hook(data.win, 3, 1L << 1, handle_key_release, &data);
 

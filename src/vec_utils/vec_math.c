@@ -55,3 +55,8 @@ t_vec  normalize(t_vec p)
   nv.e3 = p.e3 / mod;
   return (nv);
 }
+
+double		mod(t_vec v)
+{
+	return (sqrt(dot(v, v)));
+}

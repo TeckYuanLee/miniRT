@@ -20,14 +20,15 @@ int	create_ambient(t_scene *scene, t_list **objects, char **conf)
 
 	(void) objects;
 	ambient = &(scene->ambient);
-	if (ambient->init != 0)
-		return (error("Have multiple ambient config", -1));
+	// if (ambient->init != 0)
+	// 	return (error("Have multiple ambient config", -1));
 	ambient->ratio = ft_atod(conf[1]);
 	if (ambient->ratio < 0.0 || ambient->ratio > 1.0)
 		return (error("Ambient ratio not in range [0.0, 1.0]", -1));
 	if (is_vec_format(conf[2]))
 		return (error("Ambient vector in wrong format", -1));
-	ambient->color = v_div_d(convrt_to_vec(conf[2]), 255);
+	// ambient->color = v_div_d(convrt_to_vec(conf[2]), 255);
+	ambient->color = convrt_to_int(conf[2]);
 	ambient->init = 1;
 	return (0);
 }

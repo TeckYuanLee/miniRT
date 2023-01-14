@@ -26,6 +26,7 @@ int	create_sp(t_scene *scene, t_list **objects, char **conf)
 	t_object	*obj;
 
 	(void)scene;
+	printf("sp\n");
 	obj = malloc(sizeof(t_object));
 	if (obj == NULL)
 	{
@@ -37,7 +38,8 @@ int	create_sp(t_scene *scene, t_list **objects, char **conf)
 		return (error("Sphere vector in wrong format", -1));
 	obj->obj.sp.center = convrt_to_vec(conf[1]);
 	obj->obj.sp.radius = ft_atod(conf[2]);
-	obj->color = v_div_d(convrt_to_vec(conf[3]), 255);
+	// obj->color = v_div_d(convrt_to_vec(conf[3]), 255);
+	obj->color = convrt_to_int(conf[3]);
 	ft_lstadd_front(objects, ft_lstnew(obj));
 	return (0);
 }

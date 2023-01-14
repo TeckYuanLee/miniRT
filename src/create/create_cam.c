@@ -20,11 +20,11 @@ int	create_cam(t_scene *scene, t_list **objects, char **conf)
 
 	(void) objects;
 	cam = &(scene->camera);
-	if (cam->init != 0)
-	{
-		ft_putstr_fd(RED"Error: Have multiple camera config\n"RESET, 2);
-		return (-1);
-	}
+	// if (cam->init != 0)
+	// {
+	// 	ft_putstr_fd(RED"Error: Have multiple camera config\n"RESET, 2);
+	// 	return (-1);
+	// }
 	if (is_vec_format(conf[1]) && is_vec_format(conf[2]))
 	{
 		ft_putstr_fd(RED"Error: Camera vectors in wrong format\n"RESET, 2);

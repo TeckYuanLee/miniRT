@@ -41,3 +41,8 @@ t_vec	v_scale(double n, t_vec p)
 	v.e3 = n * p.e3;
 	return (v);
 }
+
+double	v_cos(t_vec a, t_vec b)
+{
+	return (dot(a, b) / (mod(a) * mod(b)));
+}

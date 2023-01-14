@@ -20,6 +20,29 @@
  * @param conf the string in format "0.0,0.1,0.2"
  * @return t_vec
  */
+int	convrt_to_int(const char *conf)
+{
+	char	**arr;
+	// t_vec	ret;
+	int	e1;
+	int	e2;
+	int	e3;
+
+	arr = ft_split(conf, ',');
+	e1 = 0;
+	e2 = 0;
+	e3 = 0;
+	e1 |= ft_atoi(arr[0]);
+	e1 <<= 16;
+	e2 |= ft_atoi(arr[1]);
+	e2 <<= 8;
+	e3 |= ft_atoi(arr[2]);
+	// printf("creating vec x:%f, y:%f, z:%f\n", ret.e1, ret.e2, ret.e3);
+	ft_free_array(arr);
+	free(arr);
+	return (e1 | e2 | e3);
+}
+
 t_vec	convrt_to_vec(const char *conf)
 {
 	char	**arr;

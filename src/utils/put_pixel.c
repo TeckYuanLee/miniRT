@@ -14,7 +14,7 @@
 
 void	put_pixel(t_data *data, int x, int y, int color)
 {
-	char	*dst;
+	int	*dst;
 
 	dst = data->img.addr + (y * data->img.line_length + x
 			* (data->img.bits_per_pixel / 8));

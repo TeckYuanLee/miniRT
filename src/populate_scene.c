@@ -11,16 +11,18 @@
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include "libft.h"
+// #include "libft.h"
 #include <stdio.h>
 
 t_scene	init_scene(void)
 {
 	t_scene	ret;
 
+	// ret->light = 0;
+	(void)ret.light;
 	ret.camera.init = 0;
 	ret.ambient.init = 0;
-	ret.light.init = 0;
+	// ret.light->init = 0;
 	return (ret);
 }
 
@@ -84,7 +86,7 @@ void	populate_scene(char **conf, t_scene *scene, t_list **objects)
 	t_crt_func	*create_funcs;
 
 	create_funcs = set_crt_funcs();
-	*scene = init_scene();
+	// *scene = init_scene();
 	while (*conf)
 	{
 		line = ft_split(*conf, ' ');
@@ -98,6 +100,7 @@ void	populate_scene(char **conf, t_scene *scene, t_list **objects)
 			free(line);
 			break ;
 		}
+		// printf("hmm?\n");
 		ft_free_array(line);
 		free(line);
 		conf++;

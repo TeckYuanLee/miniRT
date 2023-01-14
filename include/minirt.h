@@ -17,6 +17,7 @@
 # include "libft.h"
 # include "styling.h"
 # include <math.h>
+# include <stdio.h>
 
 typedef int			(*t_crt_func)(t_scene *, t_list **, char **);
 typedef t_hit_rec	(*t_hit_func)(t_ray *, double, double, t_object	*);
@@ -27,6 +28,7 @@ char		**parse_conf_file(char *filename);
 void		populate_scene(char **conf, t_scene *scene, t_list **objects);
 
 t_vec		convrt_to_vec(const char *conf);
+int		convrt_to_int(const char *conf);
 int			is_vec_format(const char *conf);
 t_crt_func	*set_crt_funcs(void);
 
@@ -52,12 +54,14 @@ t_vec		v_subtr(t_vec vec1, t_vec vec2);
 t_vec       v_scale(double n, t_vec p);
 t_vec		v_multi_d(t_vec vec1, double d);
 t_vec		v_div_d(t_vec vec1, double d);
+double      v_cos(t_vec a, t_vec b);
 
 double		length(t_vec vec);
 t_vec		unit_vec(t_vec vec);
 double		dot(t_vec v1, t_vec v2);
 t_vec	    cross(t_vec v1, t_vec v2);
 t_vec       normalize(t_vec p);
+double		mod(t_vec v);
 
 // ------ rendering functions -----
 t_hit_rec	run_hit_funcs(t_ray *r, double min, double max, t_object *obj);
@@ -69,11 +73,11 @@ t_vec		point_at_parameter(t_ray ray, double t);
 void  render_scene(t_data data);
 int  calc_ray(t_data data);
 int  color_x_light(int color, double rgb[3]);
-int  light_itsxn(t_vector o, t_vector d, t_object *lst);
+int  light_itsxn(t_vec o, t_vec d, t_object *lst);
 void  multiplier(double (*rgb)[3], double coef, int color);
 void  calc_light(t_itsxn *itsxn, t_scene data, t_object *lst);
-double	solve_sp(t_vector o, t_vector d, t_object *lst);
-void	ray_itsxn(t_vector d, t_minirt rt, t_object *closest_obj, double *closest_itsxn);
+double	solve_sp(t_vec o, t_vec d, t_object *lst);
+void	ray_itsxn(t_vec d, t_data data, t_object *closest_obj, double *closest_itsxn);
 
 
 #endif

@@ -10,10 +10,10 @@ static void  calc_normal(t_vec p, t_vec d, t_vec *normal, t_object *l)
   	if (l->id == sp)
   	{
    		*normal = normalize(v_subtr(p, l->obj.sp.center)); 
-   		if (vcos(d, *normal) > 0)
+   		if (v_cos(d, *normal) > 0)
 			*normal = v_scale(-1, *normal);
 	}
-	else if (vcos(d, l->normal) > 0)
+	else if (v_cos(d, l->normal) > 0)
         *normal = v_scale(-1, l->normal);
     else
         *normal = l->normal;
@@ -36,7 +36,7 @@ static int  trace_ray(t_vec d, t_data data)
 		itsxn.color = data.scene.background;
 	else
 		itsxn.color = closest_obj.color;
-	calc_light(&itsxn, data.scene, data.objects);
+	calc_light(&itsxn, data.scene, (t_object *)data.objects->content);
 	return (itsxn.color);
 }
 

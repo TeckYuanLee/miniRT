@@ -1,15 +1,15 @@
 #include "minirt.h"
 
-double	solve_sp(t_vector o, t_vector d, t_object *lst)
+double	solve_sp(t_vec o, t_vec d, t_object *lst)
 {
 	double		disc;
  	double		x[2];
  	double		k[3];
- 	t_vector	c;
+ 	t_vec	c;
 
 	x[0] = INFINITY;
 	x[1] = INFINITY;
-	c = vsubtract(o, lst->obj.sp.center);
+	c = v_subtr(o, lst->obj.sp.center);
  	k[0] = dot(d, d);
  	k[1] = 2 * dot(d, c);
  	k[2] = dot(c, c) - lst->obj.sp.radius * lst->obj.sp.radius;
@@ -34,10 +34,10 @@ void	ray_itsxn(t_vec d, t_data data, t_object *closest_obj, double *closest_itsx
 	while (data.objects)
 	{
   		if (((t_object *)(data.objects->content))->id == sp)
-   			dist = solve_sp(data.scene.camera.origin, d, data.objects);
+   			dist = solve_sp(data.scene.camera.origin, d, (t_object *)data.objects->content);
   		if (dist > 0.00001 && dist < *closest_itsxn)
   		{
-   			*closest_obj = *((t_object)(data.objects->content));
+   			*closest_obj = *((t_object *)(data.objects->content));
    			*closest_itsxn = dist;
   		}
   		data.objects = data.objects->next;

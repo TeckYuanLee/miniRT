@@ -50,8 +50,8 @@ TEST_OBJ := $(TEST_SRC:%.c=$(OBJDIR)%.o)
 
 all: $(NAME)
 
-$(NAME): main.c libminirt.a
-	$(GCC) -o $@ main.c $(INC) $(LIB) 
+$(NAME): main.c libminirt.a libft.a
+	$(GCC) -o $@ main.c $(INC) $(LIB) libft.a
 	@printf "$(GREEN)$@ is ready to run$(NC)\n"
 
 r: $(NAME)

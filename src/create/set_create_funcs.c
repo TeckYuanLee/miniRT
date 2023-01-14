@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "create.h"
-
+#include <stdio.h>
 #include <stdlib.h>
 
 t_crt_func	*set_crt_funcs(void)

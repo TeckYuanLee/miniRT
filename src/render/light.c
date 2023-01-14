@@ -27,14 +27,14 @@ int  light_itsxn(t_vec o, t_vec d, t_object *lst)
 	double  dist;
 
 	dist = 0;
-	while (lst)
-	{
+	// while (lst)
+	// {
 		if (lst->id == sp)
 			dist = solve_sp(o, d, lst);    
 		if (dist > 0.00001 && dist < 1)
 			return (0);
-		lst = lst->next;
-	}
+	// 	lst = lst->next;
+	// }
 	return (1);
 }
 
@@ -71,7 +71,7 @@ void  calc_light(t_itsxn *itsxn, t_scene scene, t_object *lst)
 		dir = v_subtr(scene.light->coor, itsxn->point);
 		if (light_itsxn(itsxn->point, dir, lst) && dot(itsxn->normal, dir) > 0)
 		{
-			light = scene.light->ratio * vcos(itsxn->normal, dir);
+			light = scene.light->ratio * v_cos(itsxn->normal, dir);
 			multiplier(&rgb, light, scene.light->color);
 		}    
 		scene.light = scene.light->next;
