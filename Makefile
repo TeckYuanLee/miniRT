@@ -59,7 +59,7 @@ r: $(NAME)
 	@./$<
 
 valgrind: $(NAME)
-		$(VALGRIND) ./$< config/test.rt
+		$(VALGRIND) ./$< scenes/more_spheres.rt
 
 libminirt.a: $(OBJ)
 	@ar rcs $@ $^
