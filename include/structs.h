@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:30:30 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/16 13:34:28 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/16 14:35:01 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ typedef struct s_scene
 {
 	t_camera	camera;
 	t_ambient	ambient;
-	t_list		*light;
+	t_list		*lights;
 	int			background;
 }				t_scene;
 
