@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:30:30 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/16 14:35:01 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/16 17:29:01 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_vector
 typedef struct s_plane
 {
 	t_vec	coor;
-	t_vec	orientation;
+	t_vec	nv;
 }				t_plane;
 
 typedef struct s_triangle
@@ -47,6 +47,7 @@ typedef struct s_sphere
 typedef struct s_cylinder
 {
 	t_vec	center;
+	t_vec	nv;
 	double	radius;
 	double	height;
 }				t_cylinder;

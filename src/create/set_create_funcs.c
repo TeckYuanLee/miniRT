@@ -20,8 +20,8 @@ t_crt_func	*set_crt_funcs(void)
 
 	funcs = (t_crt_func *)malloc(sizeof(t_crt_func) * (L + 1));
 	funcs[sp] = create_sp;
-	funcs[pl] = NULL;
-	funcs[cy] = NULL;
+	funcs[pl] = create_pl;
+	funcs[cy] = create_cy;
 	funcs[A] = create_ambient;
 	funcs[C] = create_cam;
 	funcs[L] = create_light;

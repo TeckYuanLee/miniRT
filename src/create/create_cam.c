@@ -6,12 +6,11 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 13:10:07 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/08 18:31:12 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/16 16:46:47 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-#include "libft.h"
+#include "create.h"
 
 int	create_cam(t_scene *scene, t_list **objects, char **conf)
 {

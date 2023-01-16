@@ -36,7 +36,7 @@ static int	trace_ray(t_vec d, t_data data)
 		itsxn.color = data.scene.background;
 	else
 		itsxn.color = closest_obj.color;
-	calc_light(&itsxn, data.scene.lights, data.scene.ambient,(t_object *)data.objects->content);
+	calc_light(&itsxn, data.scene.lights, data.scene.ambient, data.objects);
 	return (itsxn.color);
 }
 
@@ -65,7 +65,7 @@ static t_vec	cam_direction(t_vec d, t_vec cam_nv)
 }
 
 //determine position of a point in 3D space (map 2d pixel to 3d scene)
-static t_veccam_position(t_data data)
+static t_vec	cam_position(t_data data)
 {
 	double		asp_ratio;
 	double		adj_fov;
