@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 08:43:26 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/09 12:47:19 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/16 15:50:01 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,11 @@ t_scene	init_scene(void)
 {
 	t_scene	ret;
 
-	// ret->light = 0;
-	(void)ret.light;
 	ret.camera.init = 0;
 	ret.ambient.init = 0;
-	// ret.light->init = 0;
 	return (ret);
 }
 
-/**
- * @brief run this when populate_scene has error to free previous objects
- * in linked list
- *
- * @param objects linked list to free
- */
-void	populate_error(t_list **objects)
-{
-	ft_putstr_fd(RED"Error: Unabale to populate scene\n"RESET, 2);
-	ft_lstclear(objects, free);
-}
 
 /**
  * a function to create different object and add to linked list, if got error,
@@ -44,25 +30,32 @@ void	populate_error(t_list **objects)
  * Errors:
  * - invalid identifier, not enough information, wrong information format
 */
-int	identify(char *line)
+int	identify_and_create(
+	char **line, t_scene *scene, t_list **objects, t_crt_func *crt_funcs)
 {
-	int		i;
-	char	**identifier;
+	int			i;
+	static char	**identifier;
 
-	identifier = ft_split(CONFIG_ID, ',');
+	if (identifier == NULL)
+		identifier = ft_split(CONFIG_ID, ',');
 	i = -1;
 	while (identifier[++i])
 	{
-		if (ft_strncmp(identifier[i], line, ft_strlen(line)) == 0)
+		if (ft_strncmp(identifier[i], line[0], ft_strlen(line[0])) == 0)
 		{
-			ft_free_array(identifier);
-			free(identifier);
-			return (i);
+			break ;
 		}
 	}
-	ft_free_array(identifier);
-	free(identifier);
-	return (-1);
+	if (i > L)
+	{
+		ft_putstr_fd(YELLOW"WARNING: Unrecognized characters\n"RESET, 2);
+		return (1);
+	}
+	if (crt_funcs[i](scene, objects, line) == -1)
+	{
+		return (-1);
+	}
+	return (1);
 }
 
 
@@ -71,8 +64,15 @@ void	show_objects(void *content)
 	t_object	*obj;
 
 	obj = (t_object *)content;
-	printf("id: %c\t", (obj->id + 48));
+	printf("Object:\tid: %c\t", (obj->id + 48));
 	show_vec(obj->obj.sp.center);
+}
+
+void	show_light(void *light)
+{
+
+	printf("Light:\t\t");
+	show_vec(((t_light *)light)->coor);
 }
 
 /**
@@ -82,29 +82,28 @@ void	show_objects(void *content)
 void	populate_scene(char **conf, t_scene *scene, t_list **objects)
 {
 	char		**line;
-	int			id;
+	int			stat;
 	t_crt_func	*create_funcs;
 
 	create_funcs = set_crt_funcs();
-	// *scene = init_scene();
+	*scene = init_scene();
 	while (*conf)
 	{
 		line = ft_split(*conf, ' ');
-		id = identify(line[0]);
-		if (id == -1)
-			break ;
-		if (create_funcs[id](scene, objects, line) == -1)
+		stat = identify_and_create(line, scene, objects, create_funcs);
+		if (stat == -1)
 		{
-			populate_error(objects);
-			ft_free_array(line);
-			free(line);
-			break ;
+			ft_putstr_fd(RED"Error: Unabale to populate scene\n"RESET, 2);
+			ft_lstclear(objects, free);
+			ft_lstclear(&scene->lights, free);
 		}
-		// printf("hmm?\n");
 		ft_free_array(line);
 		free(line);
+		if (stat == -1)
+			break ;
 		conf++;
 	}
 	ft_lstiter(*objects, show_objects);
+	ft_lstiter(scene->lights, show_light);
 	free(create_funcs);
 }

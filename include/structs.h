@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:30:30 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/10 12:12:06 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/16 17:29:01 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_vector
 typedef struct s_plane
 {
 	t_vec	coor;
-	t_vec	orientation;
+	t_vec	nv;
 }				t_plane;
 
 typedef struct s_triangle
@@ -47,6 +47,7 @@ typedef struct s_sphere
 typedef struct s_cylinder
 {
 	t_vec	center;
+	t_vec	nv;
 	double	radius;
 	double	height;
 }				t_cylinder;
@@ -84,7 +85,7 @@ typedef struct s_object
 	union u_objects	obj;
 	int				color;
 	t_vec			normal;
-	struct s_object	*next;
+	// struct s_object	*next;
 }				t_object;
 
 typedef struct s_ray
@@ -114,18 +115,18 @@ typedef struct s_ambient
 
 typedef struct s_light
 {
-	char			init;
+	// char			init;
 	t_vec			coor;
 	double			ratio;
 	int				color;
-	struct s_light	*next;
+	// struct s_light	*next;
 }				t_light;
 
 typedef struct s_scene
 {
 	t_camera	camera;
 	t_ambient	ambient;
-	t_light		*light;
+	t_list		*lights;
 	int			background;
 }				t_scene;
 
@@ -159,12 +160,12 @@ typedef struct s_res
 	int	yres;
 }				t_res;
 
-typedef struct  s_itsxn
+typedef struct s_itsxn
 {
-	int    color;
-	t_vec  normal;
-	t_vec  point;
-}               t_itsxn;
+	int		color;
+	t_vec	normal;
+	t_vec	point;
+}				t_itsxn;
 
 typedef struct s_hit_rec {
 	t_vec	p;

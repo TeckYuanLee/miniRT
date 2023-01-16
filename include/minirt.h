@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 12:32:10 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/10 12:41:49 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/16 16:17:41 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char		**parse_conf_file(char *filename);
 void		populate_scene(char **conf, t_scene *scene, t_list **objects);
 
 t_vec		convrt_to_vec(const char *conf);
-int		convrt_to_int(const char *conf);
+int			convrt_to_int(const char *conf);
 int			is_vec_format(const char *conf);
 t_crt_func	*set_crt_funcs(void);
 
@@ -70,14 +70,14 @@ double		hit_sphere(t_vec center, double rad, t_ray r);
 t_vec		point_at_parameter(t_ray ray, double t);
 
 // ------ rendering functions -----
-void  render_scene(t_data data);
-int  calc_ray(t_data data);
-int  color_x_light(int color, double rgb[3]);
-int  light_itsxn(t_vec o, t_vec d, t_object *lst);
-void  multiplier(double (*rgb)[3], double coef, int color);
-void  calc_light(t_itsxn *itsxn, t_scene data, t_object *lst);
-double	solve_sp(t_vec o, t_vec d, t_object *lst);
-void	ray_itsxn(t_vec d, t_data data, t_object *closest_obj, double *closest_itsxn);
+void		render_scene(t_data data);
+int			calc_ray(t_data data);
+int			color_x_light(int color, double rgb[3]);
+int			light_itsxn(t_vec o, t_vec d, t_list *lst);
+void		multiplier(double (*rgb)[3], double coef, int color);
+void		calc_light(t_itsxn *itsxn, t_list *lights, t_ambient ambient, t_list *lst);
+double		solve_sp(t_vec o, t_vec d, t_object *lst);
+void		ray_itsxn(t_vec d, t_data data, t_object *closest_obj, double *closest_itsxn);
 
 
 #endif

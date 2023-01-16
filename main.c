@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:30:39 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/11 18:03:49 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/16 15:18:42 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@
 
 void	init_data(t_data *data)
 {
-	double	aspect_ratio;
+	// double	aspect_ratio;
 
-	aspect_ratio = 16.0 / 9.0;
+	// aspect_ratio = 16.0 / 9.0;
 	data->mlx = mlx_init();
-	data->xres = 600;
-	data->yres = data->xres / aspect_ratio;
+	// data->xres = 600;
+	data->xres = 1000;
+	// data->yres = data->xres / aspect_ratio;
+	data->yres = 800;
 	data->win = mlx_new_window(data->mlx, data->xres, data->yres, "miniRT");
 	data->img.mlx_img = mlx_new_image(data->mlx, data->xres, data->yres);
 	data->img.addr = (int *)mlx_get_data_addr(data->img.mlx_img,
@@ -50,6 +52,9 @@ int	render(t_data data)
 	return (0);
 }
 
+
+// Have to initialize objects and ligths pointer to NULL, else there will be
+// garbage value in it and caused the linked list to fail (line 66, 67)
 int	main(int argc, char **argv)
 {
 	t_data		data;
@@ -61,9 +66,9 @@ int	main(int argc, char **argv)
 		return (-1);
 	}
 	data.objects = NULL;
+	data.scene.lights = NULL;
 	configs = parse_conf_file(argv[1]);
 	populate_scene(configs, &data.scene, &data.objects);
-	printf("hmm?\n");
 	ft_free_array(configs);
 	free(configs);
 	init_data(&data);
