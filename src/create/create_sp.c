@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 20:00:54 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/16 15:42:31 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/16 16:28:05 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	create_sp(t_scene *scene, t_list **objects, char **conf)
 	if (is_vec_format(conf[1]) && is_vec_format(conf[2]))
 		return (error("Sphere vector in wrong format", -1));
 	obj->obj.sp.center = convrt_to_vec(conf[1]);
-	obj->obj.sp.radius = ft_atod(conf[2]);
+	obj->obj.sp.radius = ft_atod(conf[2]) / 2;
 	obj->color = convrt_to_int(conf[3]);
 	ft_lstadd_front(objects, ft_lstnew(obj));
 	return (0);
