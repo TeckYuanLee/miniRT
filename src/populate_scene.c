@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 08:43:26 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/16 13:37:15 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/16 14:35:41 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,14 @@ void	show_objects(void *content)
 	show_vec(obj->obj.sp.center);
 }
 
+void	show_light(void *light)
+{
+
+	printf("Light:");
+	show_vec(((t_light*)light)->coor);
+	printf("\n");
+}
+
 /**
  * for each line in conf, split with space, identify identifier, keep track
  * of A, C, L(only can have one of these), run different create for each
@@ -96,7 +104,7 @@ void	populate_scene(char **conf, t_scene *scene, t_list **objects)
 			break ;
 		if (create_funcs[id](scene, objects, line) == -1)
 		{
-			populate_error(objects, &scene->light);
+			populate_error(objects, &scene->lights);
 			ft_free_array(line);
 			free(line);
 			break ;
@@ -107,5 +115,6 @@ void	populate_scene(char **conf, t_scene *scene, t_list **objects)
 		conf++;
 	}
 	ft_lstiter(*objects, show_objects);
+	ft_lstiter(scene->lights, show_light);
 	free(create_funcs);
 }
