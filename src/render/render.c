@@ -33,5 +33,5 @@ void  render_scene(t_data data)
   		printf("\rRendering scene... [%.2f%%]", (double)100 * data.h / data.yres);
  		data.h++;
 	}
-	printf("\rRendering scene...   [100%%]");
+	printf("\rRendering scene...   [100%%]\n");
 }

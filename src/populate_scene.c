@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 08:43:26 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/16 15:24:07 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/16 15:43:57 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,11 @@ int	identify_and_create(
 			break ;
 		}
 	}
-	if (i > L + 1)
-		return (-1);
+	if (i > L)
+	{
+		ft_putstr_fd(YELLOW"WARNING: Unrecognized characters\n"RESET, 2);
+		return (1);
+	}
 	if (crt_funcs[i](scene, objects, line) == -1)
 	{
 		return (-1);
@@ -61,16 +64,15 @@ void	show_objects(void *content)
 	t_object	*obj;
 
 	obj = (t_object *)content;
-	printf("id: %c\t", (obj->id + 48));
+	printf("Obj\tid: %c\t", (obj->id + 48));
 	show_vec(obj->obj.sp.center);
 }
 
 void	show_light(void *light)
 {
 
-	printf("Light:\t");
+	printf("Light:\t\t");
 	show_vec(((t_light *)light)->coor);
-	printf("\n");
 }
 
 /**
