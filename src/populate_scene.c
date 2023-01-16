@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 08:43:26 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/09 12:47:19 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/16 13:37:15 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_scene	init_scene(void)
 	t_scene	ret;
 
 	// ret->light = 0;
-	(void)ret.light;
+	// (void)ret.light;
 	ret.camera.init = 0;
 	ret.ambient.init = 0;
 	// ret.light->init = 0;
@@ -32,10 +32,11 @@ t_scene	init_scene(void)
  *
  * @param objects linked list to free
  */
-void	populate_error(t_list **objects)
+void	populate_error(t_list **objects, t_list **lights)
 {
 	ft_putstr_fd(RED"Error: Unabale to populate scene\n"RESET, 2);
 	ft_lstclear(objects, free);
+	ft_lstclear(lights, free);
 }
 
 /**
@@ -86,7 +87,7 @@ void	populate_scene(char **conf, t_scene *scene, t_list **objects)
 	t_crt_func	*create_funcs;
 
 	create_funcs = set_crt_funcs();
-	// *scene = init_scene();
+	*scene = init_scene();
 	while (*conf)
 	{
 		line = ft_split(*conf, ' ');
@@ -95,7 +96,7 @@ void	populate_scene(char **conf, t_scene *scene, t_list **objects)
 			break ;
 		if (create_funcs[id](scene, objects, line) == -1)
 		{
-			populate_error(objects);
+			populate_error(objects, &scene->light);
 			ft_free_array(line);
 			free(line);
 			break ;

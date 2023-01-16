@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:30:30 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/16 13:30:51 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/16 13:34:28 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ typedef struct s_ambient
 
 typedef struct s_light
 {
-	char			init;
+	// char			init;
 	t_vec			coor;
 	double			ratio;
 	int				color;
