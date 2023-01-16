@@ -1,15 +1,15 @@
 #include "minirt.h"
 
-//calculate the surface normal at a point of intersection, 
-//taking into account the type of object and 
-//the incoming direction of the ray. 
-//This information is used to compute the lighting and shading 
+//calculate the surface normal at a point of intersection,
+//taking into account the type of object and
+//the incoming direction of the ray.
+//This information is used to compute the lighting and shading
 //of the object in the scene.
 static void  calc_normal(t_vec p, t_vec d, t_vec *normal, t_object *l)
 {
   	if (l->id == sp)
   	{
-   		*normal = normalize(v_subtr(p, l->obj.sp.center)); 
+   		*normal = normalize(v_subtr(p, l->obj.sp.center));
    		if (v_cos(d, *normal) > 0)
 			*normal = v_scale(-1, *normal);
 	}
@@ -19,7 +19,7 @@ static void  calc_normal(t_vec p, t_vec d, t_vec *normal, t_object *l)
         *normal = l->normal;
 }
 
-//trace a ray from origin to direction in the scene and 
+//trace a ray from origin to direction in the scene and
 //return color of the pixel that the ray intersects
 static int  trace_ray(t_vec d, t_data data)
 {
@@ -36,11 +36,11 @@ static int  trace_ray(t_vec d, t_data data)
 		itsxn.color = data.scene.background;
 	else
 		itsxn.color = closest_obj.color;
-	calc_light(&itsxn, data.scene, (t_object *)data.objects->content);
+	calc_light(&itsxn, data.scene.lights, data.scene.ambient,(t_object *)data.objects->content);
 	return (itsxn.color);
 }
 
-//rotate the vector 'd' in such a way that it points towards 
+//rotate the vector 'd' in such a way that it points towards
 //the camera's normal vector 'cam_nv'
 static t_vec  cam_direction(t_vec d, t_vec cam_nv)
 {
@@ -48,7 +48,7 @@ static t_vec  cam_direction(t_vec d, t_vec cam_nv)
   	t_vec  y_axis;
   	t_vec  z_axis;
   	t_vec  rotated;
-  
+
  	y_axis = new_vect(0, 1, 0);
   	z_axis = cam_nv;
 	if (cam_nv.e2 == 1)
