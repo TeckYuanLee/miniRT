@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 20:00:54 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/09 12:28:47 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/16 15:42:31 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,11 @@
 // * the sphere diameter: 12.6
 // * R,G,B colors in range [0-255]: 10, 0, 255
 
-
-
 int	create_sp(t_scene *scene, t_list **objects, char **conf)
 {
 	t_object	*obj;
 
 	(void)scene;
-	printf("sp\n");
 	obj = malloc(sizeof(t_object));
 	if (obj == NULL)
 	{
@@ -38,7 +35,6 @@ int	create_sp(t_scene *scene, t_list **objects, char **conf)
 		return (error("Sphere vector in wrong format", -1));
 	obj->obj.sp.center = convrt_to_vec(conf[1]);
 	obj->obj.sp.radius = ft_atod(conf[2]);
-	// obj->color = v_div_d(convrt_to_vec(conf[3]), 255);
 	obj->color = convrt_to_int(conf[3]);
 	ft_lstadd_front(objects, ft_lstnew(obj));
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:41:43 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/08 18:37:22 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/16 15:41:17 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@
 int	convrt_to_int(const char *conf)
 {
 	char	**arr;
-	// t_vec	ret;
-	int	e1;
-	int	e2;
-	int	e3;
+	int		e1;
+	int		e2;
+	int		e3;
 
 	arr = ft_split(conf, ',');
 	e1 = 0;
@@ -37,7 +36,6 @@ int	convrt_to_int(const char *conf)
 	e2 |= ft_atoi(arr[1]);
 	e2 <<= 8;
 	e3 |= ft_atoi(arr[2]);
-	// printf("creating vec x:%f, y:%f, z:%f\n", ret.e1, ret.e2, ret.e3);
 	ft_free_array(arr);
 	free(arr);
 	return (e1 | e2 | e3);
@@ -52,7 +50,6 @@ t_vec	convrt_to_vec(const char *conf)
 	ret.e1 = ft_atod(arr[0]);
 	ret.e2 = ft_atod(arr[1]);
 	ret.e3 = ft_atod(arr[2]);
-	printf("creating vec x:%f, y:%f, z:%f\n", ret.e1, ret.e2, ret.e3);
 	ft_free_array(arr);
 	free(arr);
 	return (ret);
