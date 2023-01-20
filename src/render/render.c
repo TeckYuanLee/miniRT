@@ -6,15 +6,20 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:44:44 by telee             #+#    #+#             */
-/*   Updated: 2023/01/20 12:08:24 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 13:20:33 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-
-//rotate the vector 'd' in such a way that it points towards
-//the camera's normal vector 'cam_nv'
+/**
+ * @brief To rotate the ray in such a way that it points towards
+ * the camera's normal vector
+ *
+ * @param d the ray
+ * @param cam_nv the camera normal from config
+ * @return t_vec the direction of the ray
+ */
 static t_vec	cam_direction(t_vec d, t_vec cam_nv)
 {
 	t_vec	x_axis;
@@ -37,7 +42,14 @@ static t_vec	cam_direction(t_vec d, t_vec cam_nv)
 	return (rotated);
 }
 
-//determine position of a point in 3D space (map 2d pixel to 3d scene)
+/**
+ * @brief Determine the position of the ray from 2d to 3d world
+ *
+ * @param w current pixel's width
+ * @param h current pixel's height
+ * @param scene
+ * @return t_vec the position
+ */
 static t_vec	cam_position(int w, int h, t_scene *scene)
 {
 	double		asp_ratio;
@@ -77,13 +89,21 @@ static t_vec	cam_position(int w, int h, t_scene *scene)
  *	printf("\rRendering scene... [100%%]\n");s
  */
 
-
+/**
+ * @brief For each pixel, get the ray direction corresponding to the height and
+ * width. Then trace the ray into world to get the result color, and put in on
+ * the scene.
+ *
+ * @param data data struct that holds everything
+ * @param scene	scenec struct fo camera and lights
+ * @param objects list of objects
+ */
 void	render_scene(t_data data, t_scene *scene, t_list *objects)
 {
 	int		color;
 	int		h;
 	int		w;
-	t_vec	ray;
+	t_vec	dir;
 
 	scene->background = 0x202020;
 	h = 0;
@@ -92,9 +112,9 @@ void	render_scene(t_data data, t_scene *scene, t_list *objects)
 		w = 0;
 		while (w < scene->res.xres)
 		{
-			ray = cam_position(w, h, scene);
-			ray = cam_direction(ray, scene->camera.nv);
-			color = trace_ray(ray, data);
+			dir = cam_position(w, h, scene);
+			dir = cam_direction(dir, scene->camera.nv);
+			color = trace_ray(dir, data);
 			data.img.addr[h * scene->res.xres + w] = color;
 			w++;
 		}
