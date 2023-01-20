@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 12:14:38 by telee             #+#    #+#             */
-/*   Updated: 2023/01/20 13:37:35 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:37:35 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ double	solve_sp(t_vec o, t_vec d, t_object *lst)
 		return (x[1]);
 	return (INFINITY);
 }
-
 
 /**
  * @brief Go through the list of objects and check for intersection. Tracks the

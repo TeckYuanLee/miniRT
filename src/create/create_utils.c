@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:41:43 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/16 17:31:52 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:38:24 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,8 @@ int	convrt_to_int(const char *conf)
 	int		e3;
 
 	arr = ft_split(conf, ',');
-	// e1 = 0;
-	// e2 = 0;
-	// e3 = 0;
 	e1 = 0 | ft_atoi(arr[0]) << 16;
-	// e1 <<= 16;
 	e2 = 0 | ft_atoi(arr[1]) << 8;
-	// e2 <<= 8;
 	e3 = 0 | ft_atoi(arr[2]);
 	ft_free_array(arr);
 	free(arr);

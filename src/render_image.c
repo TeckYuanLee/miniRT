@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 20:55:54 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/20 15:24:24 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:37:10 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ t_vec	calc_color(t_ray *ray, t_list *objects)
 			v_multi_d((t_vec){1.0, 1.0, 1.0, 0}, t)));
 	}
 }
-
 
 t_ray	camera_get_ray(t_camera *cam, double u, double v)
 {

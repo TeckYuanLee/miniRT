@@ -26,6 +26,5 @@ t_crt_func	*set_crt_funcs(void)
 	funcs[C] = create_cam;
 	funcs[R] = create_res;
 	funcs[l] = create_light;
-
 	return (funcs);
 }

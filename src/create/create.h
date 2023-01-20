@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 18:55:56 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/20 10:08:48 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:41:15 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int			create_light(t_scene *scene, t_list **objects, char **conf);
 int			create_sp(t_scene *scene, t_list **objects, char **conf);
 int			create_cy(t_scene *scene, t_list **objects, char **conf);
 int			create_pl(t_scene *scene, t_list **objects, char **conf);
-
 
 t_vec		convrt_to_vec(const char *conf);
 int			convrt_to_int(const char *conf);

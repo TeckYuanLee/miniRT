@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_conf_file.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 01:01:22 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/08 16:29:20 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:35:14 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,3 @@ char	**parse_conf_file(char *filename)
 	close(fd);
 	return (line_array);
 }
-
-// todo - error handling, check file, read line, split line, check line, make object
-

@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:48:03 by telee             #+#    #+#             */
-/*   Updated: 2023/01/20 14:54:57 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:37:44 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ void	calc_light(
 	t_light		*light_obj;
 
 	light_val = 0.0;
-	// ft_memset(rgb, 0, 3 * sizeof(double));
 	rgb = multiplier((t_vec){0, 0, 0, 0}, ambient.ratio, ambient.color);
 	while (lights)
 	{

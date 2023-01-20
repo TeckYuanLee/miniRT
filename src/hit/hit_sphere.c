@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 09:28:53 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/10 13:21:05 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:49:17 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,20 @@ t_sp_math	calc_math(t_ray *r, t_sphere sp)
 	return (m);
 }
 
+double	calc_dist(t_sp_math m, double min, double max)
+{
+	double	tmp;
+
+	tmp = (-m.b - sqrt(m.discriminant)) / m.a;
+	if ((tmp < max && tmp > min) == 0)
+	{
+		tmp = (-m.b + sqrt(m.discriminant)) / m.a;
+		if ((tmp < max && tmp > min) == 0)
+			return (-1);
+	}
+	return (tmp);
+}
+
 t_hit_rec	hit_spherev2(t_ray *r, double min, double max, t_object *obj)
 {
 	t_sphere	sp;
@@ -46,15 +60,11 @@ t_hit_rec	hit_spherev2(t_ray *r, double min, double max, t_object *obj)
 	rec.hit = 0;
 	if (m.discriminant > 0)
 	{
-		tmp = (-m.b - sqrt(m.discriminant)) / m.a;
-		if ((tmp < max && tmp > min) == 0)
+		tmp = calc_dist(m, min, max);
+		if (tmp == -1)
 		{
-			tmp = (-m.b + sqrt(m.discriminant)) / m.a;
-			if ((tmp < max && tmp > min) == 0)
-			{
-				rec.hit = 0;
-				return (rec);
-			}
+			rec.hit = 0;
+			return (rec);
 		}
 		rec.t = tmp;
 		rec.p = point_at_parameter(*r, rec.t);
@@ -63,4 +73,3 @@ t_hit_rec	hit_spherev2(t_ray *r, double min, double max, t_object *obj)
 	}
 	return (rec);
 }
-

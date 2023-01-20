@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 13:22:20 by telee             #+#    #+#             */
-/*   Updated: 2023/01/20 15:01:23 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:38:03 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static void	calc_normal(t_vec p, t_vec d, t_vec *normal, t_object *l)
 		*normal = l->normal;
 }
 
-
 /**
  * @brief Trace a ray from origin to direction in the scene and
  * return color of the pixel that the ray intersects with the closest object
@@ -66,4 +65,3 @@ int	trace_ray(t_vec d, t_data data)
 	calc_light(&itsxn, data.scene.lights, data.scene.ambient, data.objects);
 	return (itsxn.color);
 }
-

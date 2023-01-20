@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   populate_scene.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 08:43:26 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/20 10:13:40 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:36:53 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-// #include "libft.h"
 #include <stdio.h>
 
 t_scene	init_scene(void)
@@ -22,7 +21,6 @@ t_scene	init_scene(void)
 	ret.ambient.init = 0;
 	return (ret);
 }
-
 
 /**
  * a function to create different object and add to linked list, if got error,
@@ -58,7 +56,11 @@ int	identify_and_create(
 	return (1);
 }
 
-
+/**
+ * @brief
+ *
+ * @param content
+ */
 void	show_objects(void *content)
 {
 	t_object	*obj;
@@ -70,7 +72,6 @@ void	show_objects(void *content)
 
 void	show_light(void *light)
 {
-
 	printf("Light:\t\t");
 	show_vec(((t_light *)light)->coor);
 }
