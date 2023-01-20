@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:30:39 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/20 10:34:31 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 10:59:21 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,14 @@
 
 void	init_data(t_data *data)
 {
-	// double	aspect_ratio;
+	int	xres;
+	int	yres;
 
-	// aspect_ratio = 16.0 / 9.0;
 	data->mlx = mlx_init();
-	// data->xres = 600;
-	data->xres = data->scene.res.xres;
-	// data->yres = data->xres / aspect_ratio;
-	data->yres = data->scene.res.yres;
-	data->win = mlx_new_window(data->mlx, data->xres, data->yres, "miniRT");
-	data->img.mlx_img = mlx_new_image(data->mlx, data->xres, data->yres);
+	xres = data->scene.res.xres;
+	yres = data->scene.res.yres;
+	data->win = mlx_new_window(data->mlx, xres, yres, "miniRT");
+	data->img.mlx_img = mlx_new_image(data->mlx, xres, yres);
 	data->img.addr = (int *)mlx_get_data_addr(data->img.mlx_img,
 			&data->img.bits_per_pixel, &data->img.line_length,
 			&data->img.endian);

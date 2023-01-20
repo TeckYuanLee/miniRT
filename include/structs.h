@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:30:30 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/20 10:31:02 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 11:22:28 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,13 +149,9 @@ typedef struct s_img
 
 typedef struct s_data
 {
-	int		xres;
-	int		yres;
 	void	*mlx;
 	void	*win;
 	t_img	img;
-	int		w;
-	int		h;
 	t_scene	scene;
 	t_list	*objects;
 }				t_data;

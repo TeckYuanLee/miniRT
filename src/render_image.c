@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_image.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 20:55:54 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/10 13:10:21 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 10:57:04 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,14 @@ void	render_image(t_data *data, t_scene *scene, t_list *objects)
 	scene->camera.lower_left_corner = new_vect(-2.0, -1.0, -1.0);
 	scene->camera.horizontal = new_vect(4.0, 0.0, 0.0);
 	scene->camera.vertical = new_vect(0.0, 2.0, 0.0);
-	j = data->h;
+	j = scene->res.yres;
 	while (--j >= 0)
 	{
 		i = -1;
-		while (++i < data->w)
+		while (++i < scene->res.xres)
 		{
 			ray = camera_get_ray(
-					&scene->camera, (double)i / data->w, (double)j / data->h);
+					&scene->camera, (double)i / scene->res.xres, (double)j / scene->res.yres);
 			color = calc_color(&ray, objects);
 			put_pixel(data, i, j, create_trgb_vec(&color));
 		}

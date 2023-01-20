@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 12:32:10 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/16 16:17:41 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 11:04:19 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ double		hit_sphere(t_vec center, double rad, t_ray r);
 t_vec		point_at_parameter(t_ray ray, double t);
 
 // ------ rendering functions -----
-void		render_scene(t_data data);
-int			calc_ray(t_data data);
+void		render_scene(t_data data, t_scene *scene, t_list *objects);
+int			trace_ray(t_vec d, t_data data);
 int			color_x_light(int color, double rgb[3]);
 int			light_itsxn(t_vec o, t_vec d, t_list *lst);
 void		multiplier(double (*rgb)[3], double coef, int color);
