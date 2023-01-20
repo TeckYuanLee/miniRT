@@ -6,12 +6,11 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 13:22:20 by telee             #+#    #+#             */
-/*   Updated: 2023/01/20 13:24:49 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 13:27:32 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
 
 /**
  * @brief Calculate the surface normal at the point of intersection,
@@ -20,10 +19,10 @@
  * This information is used to compute the lighting and shading
  * of the object in the scene.
  *
- * @param p
- * @param d
+ * @param p point at parameter
+ * @param d	ray direction
  * @param normal the normal to set value
- * @param l
+ * @param l	the closest object that ray intersects
  */
 static void	calc_normal(t_vec p, t_vec d, t_vec *normal, t_object *l)
 {
