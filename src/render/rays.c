@@ -1,10 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rays.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/20 13:22:20 by telee             #+#    #+#             */
+/*   Updated: 2023/01/20 13:24:49 by jatan            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
-//calculate the surface normal at a point of intersection,
-//taking into account the type of object and
-//the incoming direction of the ray.
-//This information is used to compute the lighting and shading
-//of the object in the scene.
+
+/**
+ * @brief Calculate the surface normal at the point of intersection,
+ * taking into account the type of object and
+ * the incoming direction of the ray.
+ * This information is used to compute the lighting and shading
+ * of the object in the scene.
+ *
+ * @param p
+ * @param d
+ * @param normal the normal to set value
+ * @param l
+ */
 static void	calc_normal(t_vec p, t_vec d, t_vec *normal, t_object *l)
 {
 	if (l->id == sp)
@@ -19,8 +39,15 @@ static void	calc_normal(t_vec p, t_vec d, t_vec *normal, t_object *l)
 		*normal = l->normal;
 }
 
-//trace a ray from origin to direction in the scene and
-//return color of the pixel that the ray intersects
+
+/**
+ * @brief Trace a ray from origin to direction in the scene and
+ * return color of the pixel that the ray intersects with the closest object
+ *
+ * @param d
+ * @param data
+ * @return int the color value
+ */
 int	trace_ray(t_vec d, t_data data)
 {
 	t_itsxn		itsxn;
