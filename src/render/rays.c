@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 13:22:20 by telee             #+#    #+#             */
-/*   Updated: 2023/01/20 13:27:32 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:01:23 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static void	calc_normal(t_vec p, t_vec d, t_vec *normal, t_object *l)
 	{
 		*normal = normalize(v_subtr(p, l->obj.sp.center));
 		if (v_cos(d, *normal) > 0)
-			*normal = v_scale(-1, *normal);
+			*normal = v_multi_d(*normal, -1);
 	}
 	else if (v_cos(d, l->normal) > 0)
-		*normal = v_scale(-1, l->normal);
+		*normal = v_multi_d(l->normal, -1);
 	else
 		*normal = l->normal;
 }
@@ -56,7 +56,8 @@ int	trace_ray(t_vec d, t_data data)
 	closest_obj.id = -1;
 	closest_itsxn = INFINITY;
 	ray_itsxn(d, data, &closest_obj, &closest_itsxn);
-	itsxn.point = v_sum(data.scene.camera.origin, v_scale(closest_itsxn, d));
+	itsxn.point = v_sum(data.scene.camera.origin,
+			v_multi_d(d, closest_itsxn));
 	calc_normal(itsxn.point, d, &(itsxn.normal), &closest_obj);
 	if (closest_obj.id == -1)
 		itsxn.color = data.scene.background;

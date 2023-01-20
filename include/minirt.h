@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 12:32:10 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/20 14:56:21 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:01:44 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ t_vec		v_multi(t_vec vec1, t_vec vec2);
 t_vec		v_div(t_vec vec1, t_vec vec2);
 t_vec		v_sum(t_vec vec1, t_vec vec2);
 t_vec		v_subtr(t_vec vec1, t_vec vec2);
-t_vec       v_scale(double n, t_vec p);
 t_vec		v_multi_d(t_vec vec1, double d);
 t_vec		v_div_d(t_vec vec1, double d);
 double      v_cos(t_vec a, t_vec b);

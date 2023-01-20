@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   vec_math.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 13:08:13 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/04 09:51:55 by jatan            ###   ########.fr       */
-/*                                                                            */
+/**/
+/*::::::::::: */
+/* vec_math.c :+::+::+: */
+/*+:+ +:+ +:+ */
+/* By: jatan <jatan@student.42kl.edu.my>+#++:+ +#+*/
+/*+#+#+#+#+#+ +#+ */
+/* Created: 2023/01/02 13:08:13 by jatan #+##+# */
+/* Updated: 2023/01/20 15:02:30 by jatan### ########.fr */
+/**/
 /* ************************************************************************** */
 
 #include "minirt.h"
@@ -36,27 +36,27 @@ double	dot(t_vec v1, t_vec v2)
 
 t_vec	cross(t_vec v1, t_vec v2)
 {
- 	t_vec	ret;
+	t_vec	ret;
 
- 	ret.e1 = v1.e2 * v2.e3 - v1.e3 * v2.e2;
+	ret.e1 = v1.e2 * v2.e3 - v1.e3 * v2.e2;
 	ret.e2 = v1.e3 * v2.e1 - v1.e1 * v2.e3;
 	ret.e3 = v1.e1 * v2.e2 - v1.e2 * v2.e1;
 	return (ret);
 }
 
-t_vec  normalize(t_vec p)
+t_vec	normalize(t_vec p)
 {
-  t_vec  nv;
-  double    mod;
+	t_vec	nv;
+	double	mod;
 
-  mod = sqrt(p.e1 * p.e1 + p.e2 * p.e2 + p.e3 * p.e3);
-  nv.e1 = p.e1 / mod;
-  nv.e2 = p.e2 / mod;
-  nv.e3 = p.e3 / mod;
-  return (nv);
+	mod = length(p);
+	nv.e1 = p.e1 / mod;
+	nv.e2 = p.e2 / mod;
+	nv.e3 = p.e3 / mod;
+	return (nv);
 }
 
-double		mod(t_vec v)
+double	mod(t_vec v)
 {
 	return (sqrt(dot(v, v)));
 }
