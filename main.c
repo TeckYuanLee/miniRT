@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:30:39 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/16 15:18:42 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 10:34:31 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	init_data(t_data *data)
 	// aspect_ratio = 16.0 / 9.0;
 	data->mlx = mlx_init();
 	// data->xres = 600;
-	data->xres = 1000;
+	data->xres = data->scene.res.xres;
 	// data->yres = data->xres / aspect_ratio;
-	data->yres = 800;
+	data->yres = data->scene.res.yres;
 	data->win = mlx_new_window(data->mlx, data->xres, data->yres, "miniRT");
 	data->img.mlx_img = mlx_new_image(data->mlx, data->xres, data->yres);
 	data->img.addr = (int *)mlx_get_data_addr(data->img.mlx_img,

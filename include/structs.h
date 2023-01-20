@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:30:30 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/16 17:29:01 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 10:31:02 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ typedef struct s_square
 // }	t_cube;
 
 
-# define CONFIG_ID "sp,pl,cy,A,C,L"
+# define CONFIG_ID "sp,pl,cy,A,C,R,l"
 
-enum e_id {sp, pl, cy, A, C, L};
+enum e_id {sp, pl, cy, A, C, R, l};
 union u_objects
 {
 	t_square	sq;
@@ -122,8 +122,15 @@ typedef struct s_light
 	// struct s_light	*next;
 }				t_light;
 
+typedef struct s_res
+{
+	int	xres;
+	int	yres;
+}				t_res;
+
 typedef struct s_scene
 {
+	t_res		res;
 	t_camera	camera;
 	t_ambient	ambient;
 	t_list		*lights;
@@ -153,12 +160,7 @@ typedef struct s_data
 	t_list	*objects;
 }				t_data;
 
-typedef struct s_res
-{
-	int	res_init;
-	int	xres;
-	int	yres;
-}				t_res;
+
 
 typedef struct s_itsxn
 {

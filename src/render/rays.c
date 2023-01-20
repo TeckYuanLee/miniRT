@@ -73,9 +73,9 @@ static t_vec	cam_position(t_data data)
 	double		e2;
 	t_vec		point;
 
-	e1 = (double)data.w / data.xres;
-	e2 = (double)data.h / data.yres;
-	asp_ratio = (double)(data.xres) / (double)(data.yres);
+	e1 = (double)data.w / data.scene.res.xres;
+	e2 = (double)data.h / data.scene.res.yres;
+	asp_ratio = (double)(data.scene.res.xres) / (double)(data.scene.res.yres);
 	adj_fov = tan((data.scene.camera.fov * M_PI / 180) / 2);
 	point.e1 = (((2 * e1) - 1) * asp_ratio * adj_fov) * -1;
 	point.e2 = (1 - (2 * e2)) * adj_fov;

@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_crt_funcs.c                                 :+:      :+:    :+:   */
+/*   create_res.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 18:57:34 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/08 18:59:10 by jatan            ###   ########.fr       */
+/*   Created: 2023/01/20 10:08:27 by jatan             #+#    #+#             */
+/*   Updated: 2023/01/20 10:14:16 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "create.h"
-#include <stdio.h>
-#include <stdlib.h>
 
-t_crt_func	*set_crt_funcs(void)
+int	create_res(t_scene *scene, t_list **objects, char **conf)
 {
-	t_crt_func	*funcs;
+	t_res	*res;
 
-	funcs = (t_crt_func *)malloc(sizeof(t_crt_func) * (l + 1));
-	funcs[sp] = create_sp;
-	funcs[pl] = create_pl;
-	funcs[cy] = create_cy;
-	funcs[A] = create_ambient;
-	funcs[C] = create_cam;
-	funcs[R] = create_res;
-	funcs[l] = create_light;
-
-	return (funcs);
+	(void) objects;
+	res = &(scene->res);
+	res->xres = ft_atoi(conf [1]);
+	res->yres = ft_atoi(conf[2]);
+	return (0);
 }

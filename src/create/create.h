@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 18:55:56 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/16 16:46:30 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 10:08:48 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 typedef int	(*t_crt_func)(t_scene *, t_list **, char **);
 
 int			create_cam(t_scene *scene, t_list **objects, char **conf);
+int			create_res(t_scene *scene, t_list **objects, char **conf);
 int			create_ambient(t_scene *scene, t_list **objects, char **conf);
 int			create_light(t_scene *scene, t_list **objects, char **conf);
 int			create_sp(t_scene *scene, t_list **objects, char **conf);

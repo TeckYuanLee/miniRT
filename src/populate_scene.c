@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 08:43:26 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/16 15:50:01 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 10:13:40 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	identify_and_create(
 			break ;
 		}
 	}
-	if (i > L)
+	if (i > l)
 	{
 		ft_putstr_fd(YELLOW"WARNING: Unrecognized characters\n"RESET, 2);
 		return (1);

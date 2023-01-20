@@ -21,16 +21,16 @@ void	render_scene(t_data data)
 	// }
 	// printf("\rRendering scene... [100%%]\n");
 	data.h = 0;
-	while (data.h < data.yres)
+	while (data.h < data.scene.res.yres)
 	{
 		data.w = 0;
-		while (data.w < data.xres)
+		while (data.w < data.scene.res.xres)
 		{
 			color = calc_ray(data);
-			data.img.addr[data.h * data.xres + data.w] = color;
+			data.img.addr[data.h * data.scene.res.xres + data.w] = color;
 			data.w++;
 		}
-		printf("\rRendering scene... [%.2f%%]", (double)100 * data.h / data.yres);
+		printf("\rRendering scene... [%.2f%%]", (double)100 * data.h / data.scene.res.yres);
 		data.h++;
 	}
 	printf("\rRendering scene... [100%%]\n");
