@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   light.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/20 14:48:03 by telee             #+#    #+#             */
+/*   Updated: 2023/01/20 14:54:57 by jatan            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 /**
@@ -7,7 +19,7 @@
  * @param rgb
  * @return int
  */
-int	color_x_light(int color, double rgb[3])
+int	color_x_light(int color, t_vec rgb)
 {
 	unsigned int	mask;
 	unsigned int	r;
@@ -15,11 +27,11 @@ int	color_x_light(int color, double rgb[3])
 	unsigned int	b;
 
 	mask = 255 << 16;
-	r = rgb[0] * ((color & mask) >> 16);
+	r = rgb.e1 * ((color & mask) >> 16);
 	mask >>= 8;
-	g = rgb[1] * ((color & mask) >> 8);
+	g = rgb.e2 * ((color & mask) >> 8);
 	mask >>= 8;
-	b = rgb[2] * (color & mask);
+	b = rgb.e3 * (color & mask);
 	if (r > 255)
 		r = 255;
 	if (g > 255)
@@ -62,16 +74,17 @@ int	light_itsxn(t_vec o, t_vec d, t_list *lst)
  * @param coef
  * @param color
  */
-void	multiplier(double (*rgb)[3], double coef, int color)
+t_vec	multiplier(t_vec rgb, double coef, int color)
 {
 	unsigned int	mask;
 
 	mask = 255 << 16;
-	(*rgb)[0] += coef * ((color & mask) >> 16) / 255;
+	rgb.e1 += coef * ((color & mask) >> 16) / 255;
 	mask >>= 8;
-	(*rgb)[1] += coef * ((color & mask) >> 8) / 255;
+	rgb.e2 += coef * ((color & mask) >> 8) / 255;
 	mask >>= 8;
-	(*rgb)[2] += coef * (color & mask) / 255;
+	rgb.e3 += coef * (color & mask) / 255;
+	return (rgb);
 }
 
 //
@@ -90,13 +103,13 @@ void	calc_light(
 	t_itsxn *itsxn, t_list *lights, t_ambient ambient, t_list *lst)
 {
 	double		light_val;
-	double		rgb[3];
+	t_vec		rgb;
 	t_vec		dir;
 	t_light		*light_obj;
 
 	light_val = 0.0;
-	ft_memset(rgb, 0, 3 * sizeof(double));
-	multiplier(&rgb, ambient.ratio, ambient.color);
+	// ft_memset(rgb, 0, 3 * sizeof(double));
+	rgb = multiplier((t_vec){0, 0, 0, 0}, ambient.ratio, ambient.color);
 	while (lights)
 	{
 		light_obj = (t_light *)lights->content;
@@ -104,7 +117,7 @@ void	calc_light(
 		if (light_itsxn(itsxn->point, dir, lst) && dot(itsxn->normal, dir) > 0)
 		{
 			light_val = light_obj->ratio * v_cos(itsxn->normal, dir);
-			multiplier(&rgb, light_val, light_obj->color);
+			rgb = multiplier(rgb, light_val, light_obj->color);
 		}
 		lights = lights->next;
 	}

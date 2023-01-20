@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:30:39 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/20 10:59:21 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 14:57:50 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	render(t_data data)
 {
 	if (data.win == NULL)
 		return (1);
-	// render_image(data, &data->scene, data.objects);
 	render_scene(data);
 	mlx_put_image_to_window(data.mlx, data.win, data.img.mlx_img, 0, 0);
 	ft_putstr_fd("Rendered image and putted image to window...\n", 1);

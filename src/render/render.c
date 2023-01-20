@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:44:44 by telee             #+#    #+#             */
-/*   Updated: 2023/01/20 13:20:33 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 14:57:29 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,24 +98,24 @@ static t_vec	cam_position(int w, int h, t_scene *scene)
  * @param scene	scenec struct fo camera and lights
  * @param objects list of objects
  */
-void	render_scene(t_data data, t_scene *scene, t_list *objects)
+void	render_scene(t_data data)
 {
 	int		color;
 	int		h;
 	int		w;
 	t_vec	dir;
 
-	scene->background = 0x202020;
+	data.scene.background = 0x202020;
 	h = 0;
-	while (h < scene->res.yres)
+	while (h < data.scene.res.yres)
 	{
 		w = 0;
-		while (w < scene->res.xres)
+		while (w < data.scene.res.xres)
 		{
-			dir = cam_position(w, h, scene);
-			dir = cam_direction(dir, scene->camera.nv);
+			dir = cam_position(w, h, &data.scene);
+			dir = cam_direction(dir, data.scene.camera.nv);
 			color = trace_ray(dir, data);
-			data.img.addr[h * scene->res.xres + w] = color;
+			data.img.addr[h * data.scene.res.xres + w] = color;
 			w++;
 		}
 		printf("\rRendering scene... [%.2f%%]",
