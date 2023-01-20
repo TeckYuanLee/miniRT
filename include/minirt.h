@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 12:32:10 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/20 15:01:44 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:22:58 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,24 @@ char		*get_next_line(int fd);
 int			error(char *message, int err_code);
 
 // ----- VECTOR UTILS AND MATHS -----
+
 double		get(t_vec *vec, enum e_vec_type c);
-void		set(t_vec *vec, enum e_vec_type c, double value);
-t_vec		new_vect(double e1, double e2, double e3);
 void		show_vec(t_vec vec);
+
+t_vec		v_multi_d(t_vec vec1, double d);
+t_vec		v_div_d(t_vec vec1, double d);
 
 t_vec		v_multi(t_vec vec1, t_vec vec2);
 t_vec		v_div(t_vec vec1, t_vec vec2);
 t_vec		v_sum(t_vec vec1, t_vec vec2);
 t_vec		v_subtr(t_vec vec1, t_vec vec2);
-t_vec		v_multi_d(t_vec vec1, double d);
-t_vec		v_div_d(t_vec vec1, double d);
-double      v_cos(t_vec a, t_vec b);
+double		v_cos(t_vec a, t_vec b);
 
 double		length(t_vec vec);
 t_vec		unit_vec(t_vec vec);
 double		dot(t_vec v1, t_vec v2);
-t_vec	    cross(t_vec v1, t_vec v2);
-t_vec       normalize(t_vec p);
-double		mod(t_vec v);
+t_vec		cross(t_vec v1, t_vec v2);
+t_vec		normalize(t_vec p);
 
 // ------ rendering functions -----
 t_hit_rec	run_hit_funcs(t_ray *r, double min, double max, t_object *obj);

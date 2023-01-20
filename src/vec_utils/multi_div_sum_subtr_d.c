@@ -12,12 +12,12 @@
 
 #include "minirt.h"
 
-t_vec	v_multi_d(t_vec vec1, double d)
+t_vec	v_multi_d(t_vec v, double d)
 {
-	return (new_vect(vec1.e1 * d, vec1.e2 * d, vec1.e3 * d));
+	return ((t_vec){v.e1 * d, v.e2 * d, v.e3 * d, 0});
 }
 
-t_vec	v_div_d(t_vec vec1, double d)
+t_vec	v_div_d(t_vec v, double d)
 {
-	return (new_vect(vec1.e1 / d, vec1.e2 / d, vec1.e3 / d));
+	return ((t_vec){v.e1 / d, v.e2 / d, v.e3 / d, 0});
 }

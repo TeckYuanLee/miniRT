@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/**/
-/*::::::::::: */
-/* vec_math.c :+::+::+: */
-/*+:+ +:+ +:+ */
-/* By: jatan <jatan@student.42kl.edu.my>+#++:+ +#+*/
-/*+#+#+#+#+#+ +#+ */
-/* Created: 2023/01/02 13:08:13 by jatan #+##+# */
-/* Updated: 2023/01/20 15:02:30 by jatan### ########.fr */
-/**/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vec_math.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/02 13:08:13 by jatan             #+#    #+#             */
+/*   Updated: 2023/01/20 15:34:06 by jatan            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
@@ -15,7 +15,7 @@
 
 double	length(t_vec vec)
 {
-	return (sqrt(vec.e1 * vec.e1 + vec.e2 * vec.e2 + vec.e3 * vec.e3));
+	return (sqrt(dot(vec, vec)));
 }
 
 t_vec	unit_vec(t_vec vec)
@@ -46,17 +46,6 @@ t_vec	cross(t_vec v1, t_vec v2)
 
 t_vec	normalize(t_vec p)
 {
-	t_vec	nv;
-	double	mod;
-
-	mod = length(p);
-	nv.e1 = p.e1 / mod;
-	nv.e2 = p.e2 / mod;
-	nv.e3 = p.e3 / mod;
-	return (nv);
+	return (v_div_d(p, length(p)));
 }
 
-double	mod(t_vec v)
-{
-	return (sqrt(dot(v, v)));
-}

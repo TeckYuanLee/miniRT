@@ -12,27 +12,27 @@
 
 #include "minirt.h"
 
-t_vec	v_multi(t_vec vec1, t_vec vec2)
+t_vec	v_multi(t_vec v1, t_vec v2)
 {
-	return (new_vect(vec1.e1 * vec2.e1, vec1.e2 * vec2.e2, vec1.e3 * vec2.e3));
+	return ((t_vec){v1.e1 * v2.e1, v1.e2 * v2.e2, v1.e3 * v2.e3, 0});
 }
 
-t_vec	v_div(t_vec vec1, t_vec vec2)
+t_vec	v_div(t_vec v1, t_vec v2)
 {
-	return (new_vect(vec1.e1 / vec2.e1, vec1.e2 / vec2.e2, vec1.e3 / vec2.e3));
+	return ((t_vec){v1.e1 / v2.e1, v1.e2 / v2.e2, v1.e3 / v2.e3, 0});
 }
 
-t_vec	v_sum(t_vec vec1, t_vec vec2)
+t_vec	v_sum(t_vec v1, t_vec v2)
 {
-	return (new_vect(vec1.e1 + vec2.e1, vec1.e2 + vec2.e2, vec1.e3 + vec2.e3));
+	return ((t_vec){v1.e1 + v2.e1, v1.e2 + v2.e2, v1.e3 + v2.e3, 0});
 }
 
-t_vec	v_subtr(t_vec vec1, t_vec vec2)
+t_vec	v_subtr(t_vec v1, t_vec v2)
 {
-	return (new_vect(vec1.e1 - vec2.e1, vec1.e2 - vec2.e2, vec1.e3 - vec2.e3));
+	return ((t_vec){v1.e1 - v2.e1, v1.e2 - v2.e2, v1.e3 - v2.e3, 0});
 }
 
 double	v_cos(t_vec a, t_vec b)
 {
-	return (dot(a, b) / (mod(a) * mod(b)));
+	return (dot(a, b) / (length(a) * length(b)));
 }

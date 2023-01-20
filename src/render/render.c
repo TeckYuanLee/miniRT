@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:44:44 by telee             #+#    #+#             */
-/*   Updated: 2023/01/20 14:57:29 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:29:02 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ static t_vec	cam_direction(t_vec d, t_vec cam_nv)
 	t_vec	z_axis;
 	t_vec	rotated;
 
-	y_axis = new_vect(0, 1, 0);
+	y_axis = (t_vec){0, 1, 0, 0};
 	z_axis = cam_nv;
 	if (cam_nv.e2 == 1)
-		x_axis = new_vect(1, 0, 0);
+		x_axis = (t_vec){1, 0, 0, 0};
 	else if (cam_nv.e2 == -1)
-		x_axis = new_vect(-1, 0, 0);
+		x_axis = (t_vec){-1, 0, 0, 0};
 	else
 		x_axis = cross(y_axis, z_axis);
 	y_axis = cross(z_axis, x_axis);
