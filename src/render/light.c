@@ -1,5 +1,12 @@
 #include "minirt.h"
 
+/**
+ * @brief Convert light to color
+ *
+ * @param color
+ * @param rgb
+ * @return int
+ */
 int	color_x_light(int color, double rgb[3])
 {
 	unsigned int	mask;
@@ -22,6 +29,14 @@ int	color_x_light(int color, double rgb[3])
 	return ((r << 16) | (g << 8) | b);
 }
 
+/**
+ * @brief Check for light intersecrion
+ *
+ * @param o
+ * @param d
+ * @param lst
+ * @return int
+ */
 int	light_itsxn(t_vec o, t_vec d, t_list *lst)
 {
 	double	dist;
@@ -38,9 +53,15 @@ int	light_itsxn(t_vec o, t_vec d, t_list *lst)
 	return (1);
 }
 
-//modifies the elements of the "rgb" array by adding to them
-//a coefficient multiplied by the
-//individual color channels of the "color" integer
+/**
+ * @brief Modifies the elements of the "rgb" array by adding to them
+ * a coefficient multiplied by the
+ * individual color channels of the "color" integer
+ *
+ * @param rgb
+ * @param coef
+ * @param color
+ */
 void	multiplier(double (*rgb)[3], double coef, int color)
 {
 	unsigned int	mask;
@@ -53,10 +74,18 @@ void	multiplier(double (*rgb)[3], double coef, int color)
 	(*rgb)[2] += coef * (color & mask) / 255;
 }
 
-//calculate the final color of a pixel by taking into account
-//the lighting of the scene, the color of the object at that point,
-//and the object's surface normal
-// vcos(itsxn->normal, direction): amt of light that reaches itsxn pt
+//
+/**
+ * @brief calculate the final color of a pixel by taking into account
+ * the lighting of the scene, the color of the object at that point,
+ * and the object's surface normal
+ *  vcos(itsxn->normal, direction): amt of light that reaches itsxn pt
+ *
+ * @param itsxn
+ * @param lights
+ * @param ambient
+ * @param lst
+ */
 void	calc_light(
 	t_itsxn *itsxn, t_list *lights, t_ambient ambient, t_list *lst)
 {

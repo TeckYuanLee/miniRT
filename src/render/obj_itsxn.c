@@ -6,12 +6,20 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 12:14:38 by telee             #+#    #+#             */
-/*   Updated: 2023/01/20 12:15:17 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 13:37:35 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief The solution for sphere object.
+ *
+ * @param o ray origin
+ * @param d ray direction
+ * @param lst the intersetcted object
+ * @return the distance as double
+ */
 double	solve_sp(t_vec o, t_vec d, t_object *lst)
 {
 	double	disc;
@@ -39,7 +47,15 @@ double	solve_sp(t_vec o, t_vec d, t_object *lst)
 }
 
 
-
+/**
+ * @brief Go through the list of objects and check for intersection. Tracks the
+ * closest intersection and the closest object.
+ *
+ * @param d ray direction
+ * @param data data struct that holds everything
+ * @param closest_obj object pointer to set
+ * @param closest_itsxn itsxn pointer to set
+ */
 void	ray_itsxn(
 	t_vec d, t_data data, t_object *closest_obj, double *closest_itsxn)
 {
