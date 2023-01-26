@@ -1,12 +1,12 @@
 NAME = minirt
 
-GCC = gcc -Wall -Wextra -Werror -g
+GCC = gcc -Wall -Wextra -Werror -g3
 OS_NAME := $(shell uname -s | tr A-Z a-z)
 VALGRIND = valgrind --leak-check=full \
          --show-leak-kinds=all \
-         --track-origins=yes \
          --verbose \
          --log-file=valgrind-out.txt \
+         --track-origins=yes \
 
 MLXDIR = mlx/mlx-$(OS_NAME)
 MLXINC :=
@@ -25,16 +25,24 @@ endif
 
 
 INC = -Iinclude -Ilibft $(MLXINC)
-LIB = -Llibft -lft -L. -lminirt $(MLXLIB)
+LIB =  -L. -lminirt $(MLXLIB) -Llibft -lft
 
 
 TEST_SRC = $(wildcard test/*.c)
 
-SRC :=	$(addprefix src/, render_image.c hit_sphere.c point_at_parameter.c \
-			$(addprefix hook/, handle_key_release.c) \
-			$(addprefix utils/, put_pixel.c create_trgb.c render_gradient.c) \
-			$(addprefix vect_utils/, get.c set.c new_vect.c multi_div_sum_subtr.c multi_div_sum_subtr_d.c vec_math.c) \
-		)
+# Put your src directory here
+SRC_DIRS = src src/hook src/utils src/vec_utils src/create src/hit
+SRC = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
+
+# SRC :=	$(addprefix src/, \
+# 			render_image.c hit_sphere.c point_at_parameter.c parse_conf_file.c \
+# 			$(addprefix hook/, \
+# 				handle_key_release.c) \
+# 			$(addprefix utils/, \
+# 				put_pixel.c create_trgb.c render_gradient.c get_next_line.c) \
+# 			$(addprefix vect_utils/, \
+# 				 get.c set.c new_vect.c multi_div_sum_subtr.c multi_div_sum_subtr_d.c vec_math.c) \
+# 		)
 
 OBJDIR = obj/
 OBJ := $(SRC:%.c=$(OBJDIR)%.o)
@@ -43,13 +51,15 @@ TEST_OBJ := $(TEST_SRC:%.c=$(OBJDIR)%.o)
 all: $(NAME)
 
 $(NAME): main.c libminirt.a
-	@$(GCC) main.c $(INC) $(LIB) -o $@
+	$(GCC) -o $@ main.c $(INC) $(LIB) 
 	@printf "$(GREEN)$@ is ready to run$(NC)\n"
 
-r : $(NAME)
-	@# $(VALGRIND) ./$<
+r: $(NAME)
 	@printf "$(PINK) Running $<...$(NC)\n"
 	@./$<
+
+valgrind: $(NAME)
+		$(VALGRIND) ./$< config/test.rt
 
 libminirt.a: $(OBJ)
 	@ar rcs $@ $^
@@ -63,7 +73,7 @@ test: $(TEST_OBJ)
 $(OBJDIR)%.o: %.c $(DEPS)
 	@mkdir -p $(dir $@)
 	@printf "Compiling $@ \033[0K\r"
-	@$(GCC) $(INC) -c $< -o $@
+	@$(GCC) -c $< $(INC) -o $@
 
 
 clean:

@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   styling.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 13:47:29 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/08 13:50:21 by jatan            ###   ########.fr       */
+/*   Created: 2023/01/07 17:31:31 by jatan             #+#    #+#             */
+/*   Updated: 2023/01/07 17:32:10 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#ifndef STYLING_H
+# define STYLING_H
 
-int	error(char *message, int err_code)
-{
-	ft_putstr_fd(RED"Error: ", 2);
-	ft_putstr_fd(message, 2);
-	ft_putstr_fd(RESET"\n", 2);
-	return (err_code);
-}
+# define BLACK "\x1B[30m"
+# define RED "\x1B[31m"
+# define GREEN "\x1B[32m"
+# define YELLOW "\x1B[33m"
+# define BLUE "\x1B[34m"
+# define MAGENTA "\x1B[35m"
+# define CYAN "\x1B[36m"
+# define WHITE "\x1B[37m"
+# define RESET "\x1B[0m"
+
+#endif

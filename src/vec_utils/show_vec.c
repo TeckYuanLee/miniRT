@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   show_vec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 13:47:29 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/08 13:50:21 by jatan            ###   ########.fr       */
+/*   Created: 2023/01/09 12:11:33 by jatan             #+#    #+#             */
+/*   Updated: 2023/01/09 12:21:23 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include <stdio.h>
 
-int	error(char *message, int err_code)
+void	show_vec(t_vec vec)
 {
-	ft_putstr_fd(RED"Error: ", 2);
-	ft_putstr_fd(message, 2);
-	ft_putstr_fd(RESET"\n", 2);
-	return (err_code);
+	printf("e1: %f\te2: %f\te3: %f \n",vec.e1, vec.e2, vec.e3);
 }

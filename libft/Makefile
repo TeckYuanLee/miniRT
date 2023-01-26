@@ -7,18 +7,18 @@ BONUS_SRCS := $(shell find . -name ft_lst\*.c)
 DEPS = libft.h
 
 all: $(NAME)
-	@echo "libft.a not available, compiling now..."
 
-$(NAME): $(SRCS:.c=.o)
+$(NAME): $(SRCS:%.c=obj/%.o)
 	@ar rcs $@ $^
 	@echo "${GREEN}libft.a compile successful!${NC}"
 
-bonus: $(BONUS_SRCS:.c=.o)  $(SRCS:.c=.o)
-	@ar rcs $(NAME) $^
+bonus: $(BONUS_SRCS:%.c=obj/%.o) $(NAME)
+	@ar rcs $(NAME) $(BONUS_SRCS:%.c=obj/%.o)
 	@echo "${GREEN}libft.a with bonus compile successful!${NC}"
 	
-%.o: %.c $(DEPS)
-	@$(CC) -c $<
+obj/%.o: %.c $(DEPS)
+	@mkdir -p obj
+	@$(CC) -c $< -o $@
 
 so:
 	$(CC) -nostartfiles -fPIC $(SRCS) $(BONUS_SRCS)
@@ -28,7 +28,7 @@ test: $(NAME) bonus
 	@$(CC) test.c -L. -lft && ./a.out
 
 clean:
-	@rm -f *.o
+	@rm -rf obj
 
 fclean: clean
 	@rm -f $(NAME)

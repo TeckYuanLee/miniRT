@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   set_crt_funcs.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 13:47:29 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/08 13:50:21 by jatan            ###   ########.fr       */
+/*   Created: 2023/01/08 18:57:34 by jatan             #+#    #+#             */
+/*   Updated: 2023/01/08 18:59:10 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "create.h"
 
-int	error(char *message, int err_code)
+#include <stdlib.h>
+
+t_crt_func	*set_crt_funcs(void)
 {
-	ft_putstr_fd(RED"Error: ", 2);
-	ft_putstr_fd(message, 2);
-	ft_putstr_fd(RESET"\n", 2);
-	return (err_code);
+	t_crt_func	*funcs;
+
+	funcs = (t_crt_func *)malloc(sizeof(t_crt_func) * (L + 1));
+	funcs[sp] = create_sp;
+	funcs[pl] = NULL;
+	funcs[cy] = NULL;
+	funcs[A] = create_ambient;
+	funcs[C] = create_cam;
+	funcs[L] = create_light;
+
+	return (funcs);
 }

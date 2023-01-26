@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit_sphere.c                                       :+:      :+:    :+:   */
+/*   ft_free_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 09:28:53 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/04 10:10:18 by jatan            ###   ########.fr       */
+/*   Created: 2023/01/06 09:01:32 by jatan             #+#    #+#             */
+/*   Updated: 2023/01/06 09:12:38 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-#include <math.h>
+#include "libft.h"
+#include <stdlib.h>
 
-double	hit_sphere(t_vec center, double rad, t_ray r)
+void	ft_free_array(char **array)
 {
-	t_vec	oc;
-	double	a;
-	double	b;
-	double	c;
-	double	discriminant;
-
-	oc = v_subtr(r.origin, center);
-	a = dot(r.dir, r.dir);
-	b = 2.0 * dot(oc, r.dir);
-	c = dot(oc, oc) - rad * rad;
-	discriminant = b * b - 4 * a * c;
-
-	if (discriminant < 0)
-		return (-1.0);
-	else
-		return ((- b - sqrt(discriminant)) / 2.0 * a);
-
+	while (*array)
+	{
+		free(*array);
+		array++;
+	}
 }

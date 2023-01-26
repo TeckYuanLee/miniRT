@@ -6,14 +6,17 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:30:30 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/04 10:20:31 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/10 12:12:06 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+# include "libft.h"
+
 enum e_vec_type {x=0, y=1, z=2, r=0, g=1, b=2};
+
 typedef struct s_vector
 {
 	double	e1;
@@ -38,20 +41,20 @@ typedef struct s_triangle
 typedef struct s_sphere
 {
 	t_vec	center;
-	double		radius;
+	double	radius;
 }				t_sphere;
 
 typedef struct s_cylinder
 {
 	t_vec	center;
-	double		radius;
-	double		height;
+	double	radius;
+	double	height;
 }				t_cylinder;
 
 typedef struct s_square
 {
 	t_vec	center;
-	double		radius;
+	double	radius;
 }				t_square;
 
 // typedef struct s_cube
@@ -61,6 +64,9 @@ typedef struct s_square
 // }	t_cube;
 
 
+# define CONFIG_ID "sp,pl,cy,A,C,L"
+
+enum e_id {sp, pl, cy, A, C, L};
 union u_objects
 {
 	t_square	sq;
@@ -74,9 +80,9 @@ union u_objects
 //linked list of objects
 typedef struct s_object
 {
-	char			flag;
+	char			id;
 	union u_objects	obj;
-	t_vec		color;
+	t_vec			color;
 	struct s_object	*next;
 }				t_object;
 
@@ -86,27 +92,60 @@ typedef struct s_ray
 	t_vec	dir;
 }				t_ray;
 
-typedef struct s_data
+// nv = normalized vector
+typedef struct s_camera
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
+	char	init;
+	t_vec	origin;
+	t_vec	nv;
+	int		fov;
+	t_vec	lower_left_corner;
+	t_vec	horizontal;
+	t_vec	vertical;
+}				t_camera;
+
+typedef struct s_ambient
+{
+	char	init;
+	double	ratio;
+	t_vec	color;
+}				t_ambient;
+
+typedef struct s_light
+{
+	char	init;
+	t_vec	coor;
+	double	ratio;
+	t_vec	color;
+}				t_light;
+
+typedef struct s_scene
+{
+	t_camera	camera;
+	t_ambient	ambient;
+	t_light		light;
+}				t_scene;
+
+
+typedef struct s_img
+{
+	void	*mlx_img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+}	t_img;
+
+typedef struct s_data
+{
+	void	*mlx;
+	void	*win;
+	t_img	img;
 	int		w;
 	int		h;
+	t_scene	scene;
+	t_list	*objects;
 }				t_data;
-
-// nv = normalized vector
-typedef struct s_camera
-{
-	int		init;
-	t_vec	origin;
-	t_vec	nv;
-	int		fov;
-}				t_camera;
 
 typedef struct s_res
 {
@@ -114,5 +153,12 @@ typedef struct s_res
 	int	xres;
 	int	yres;
 }				t_res;
+
+typedef struct s_hit_rec {
+	t_vec	p;
+	t_vec	normal;
+	double	t;
+	char	hit;
+}				t_hit_rec;
 
 #endif

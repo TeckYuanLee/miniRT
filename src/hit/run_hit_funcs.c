@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   run_hit_funcs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 13:47:29 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/08 13:50:21 by jatan            ###   ########.fr       */
+/*   Created: 2023/01/10 10:56:44 by jatan             #+#    #+#             */
+/*   Updated: 2023/01/10 12:42:51 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "hit.h"
+#include <stdlib.h>
 
-int	error(char *message, int err_code)
+t_hit_rec	run_hit_funcs(t_ray *r, double min, double max, t_object *obj)
 {
-	ft_putstr_fd(RED"Error: ", 2);
-	ft_putstr_fd(message, 2);
-	ft_putstr_fd(RESET"\n", 2);
-	return (err_code);
+	t_hit_func	funcs[3];
+
+	funcs[sp] = hit_spherev2;
+	funcs[pl] = NULL;
+	funcs[cy] = NULL;
+	return (funcs[(int)obj->id](r, min, max, obj));
 }
