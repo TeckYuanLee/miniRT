@@ -12,6 +12,20 @@
 
 #include "minirt.h"
 
+double	solve_pl(t_vec o, t_vec d, t_vec c, t_vec nv)
+{
+ 	double  x;
+	double  denom;
+
+ 	denom = dot(nv, d);
+	if (denom == 0)
+		return (INFINITY);
+ 	x = (dot(nv, v_subtr(c, o))) / denom;
+	if (x > 0)
+		return (x);
+	return (INFINITY);
+}
+
 /**
  * @brief The solution for sphere object.
  *
@@ -65,6 +79,11 @@ void	ray_itsxn(
 	{
 		if (((t_object *)(data.objects->content))->id == sp)
 			dist = solve_sp(data.scene.camera.origin,
+					d, (t_object *)data.objects->content);
+		else if (((t_object *)(data.objects->content))->id == pl)
+			dist = solve_pl(data.scene.camera.origin, d, ((t_object *)data.objects->content)->obj.pl.coor, ((t_object *)data.objects->content)->normal);
+		else if (((t_object *)(data.objects->content))->id == cy)
+			dist = solve_cy(data.scene.camera.origin,
 					d, (t_object *)data.objects->content);
 		if (dist > 0.00001 && dist < *closest_itsxn)
 		{

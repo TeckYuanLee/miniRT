@@ -36,7 +36,7 @@ int	create_pl(t_scene *scene, t_list **objects, char **conf)
 		&& is_vec_format(conf[3]))
 		return (error("Plane vector in wrong format", -1));
 	obj->obj.pl.coor = convrt_to_vec(conf[1]);
-	obj->obj.pl.nv = convrt_to_vec(conf[2]);
+	obj->normal = convrt_to_vec(conf[2]);
 	if (check_nv(obj->obj.pl.nv))
 		return (error("Plane normalized orientation vector invalid", -1));
 	obj->color = convrt_to_int(conf[3]);
