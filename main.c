@@ -63,7 +63,7 @@ int	main(int argc, char **argv)
 		return (-1);
 	}
 	data.objects = NULL;
-	data.scene.lights = NULL;
+	// data.scene.lights = NULL;
 	configs = parse_conf_file(argv[1]);
 	populate_scene(configs, &data.scene, &data.objects);
 	ft_free_array(configs);

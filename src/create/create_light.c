@@ -24,7 +24,7 @@ int	create_light(t_scene *scene, t_list **objects, char **conf)
 		perror(RED"Error: create light: "RESET);
 		return (-1);
 	}
-	if (is_vec_format(conf[1]) && is_vec_format(conf[3]))
+	if (is_vec_format(conf[1]) && is_vec_format(conf[2]))
 		return (error("Light vector in wrong format", -1));
 	light->coor = convrt_to_vec(conf[1]);
 	light->ratio = ft_atod(conf[2]);

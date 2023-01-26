@@ -19,6 +19,7 @@ t_scene	init_scene(void)
 
 	ret.camera.init = 0;
 	ret.ambient.init = 0;
+	ret.lights = NULL;
 	return (ret);
 }
 
