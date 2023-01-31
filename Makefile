@@ -13,7 +13,7 @@ MLXINC :=
 MLXLIB :=
 
 
-ifeq ($(OS_NAME), mac)
+ifeq ($(OS_NAME), darwin)
 	MLXINC += -I$(MLXDIR)
 	MLXLIB += -L$(MLXDIR) -lmlx -framework OpenGL -framework AppKit
 endif

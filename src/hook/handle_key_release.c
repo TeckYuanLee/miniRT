@@ -18,7 +18,7 @@
 int	handle_key_release(int keycode, t_data *vars)
 {
 	printf("keycode: %d\n", keycode);
-	if (keycode == 65307)
+	if (keycode == 65307 || keycode == 53)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
 		vars->win = NULL;

@@ -122,5 +122,5 @@ void	render_scene(t_data data)
 			(double)100 * h / data.scene.res.yres);
 		h++;
 	}
-	printf("\rRendering scene... [100%%]\n");
+	printf("\rRendering scene...   [100%%]\n");
 }

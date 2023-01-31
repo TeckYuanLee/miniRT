@@ -156,8 +156,6 @@ typedef struct s_data
 	t_list	*objects;
 }				t_data;
 
-
-
 typedef struct s_itsxn
 {
 	int		color;

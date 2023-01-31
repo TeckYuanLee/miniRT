@@ -58,6 +58,10 @@ int	light_itsxn(t_vec o, t_vec d, t_list *lst)
 	{
 		if (((t_object *)lst->content)->id == sp)
 			dist = solve_sp(o, d, (t_object *)lst->content);
+		else if (((t_object *)lst->content)->id == pl)
+			dist = solve_pl(o, d, ((t_object *)lst->content)->obj.pl.coor, ((t_object *)lst->content)->normal);
+		else if (((t_object *)lst->content)->id == cy)
+			dist = solve_cy(o, d, (t_object *)lst->content);
 		if (dist > 0.00001 && dist < 1)
 			return (0);
 		lst = lst->next;
