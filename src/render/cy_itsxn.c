@@ -1,5 +1,13 @@
 #include "minirt.h"
 
+/**
+ * @brief calculate intersection to the cylinder caps
+ * 
+ * @param o ray origin
+ * @param d ray direction
+ * @param lst the intersected object
+ * @return the distance as double 
+ */
 static double  cy_caps(t_vec o, t_vec d, t_object *lst)
 {
 	double		cap[2];
@@ -28,6 +36,13 @@ static double  cy_caps(t_vec o, t_vec d, t_object *lst)
 	return (INFINITY);
 }
 
+/**
+ * @brief check if point of intersection is within the range of cylinder
+ * 
+ * @param x store intersection distance
+ * @param dist store closest intersection to cylinder ends
+ * @param lst the intersected object
+ */
 static void	get_closest_itsxn(double x[2], double dist[2], t_object *lst)
 {
 	if ((dist[0] >= 0 && dist[0] <= lst->obj.cy.height && x[0] > 0.00001)
@@ -46,6 +61,16 @@ static void	get_closest_itsxn(double x[2], double dist[2], t_object *lst)
 	}
 }
 
+/**
+ * @brief calculate distance of intersection to center of each cylinder ends/
+ * 
+ * 
+ * @param o ray origin
+ * @param d ray direction
+ * @param nv adjusted cylinder normal
+ * @param lst the intersected object
+ * @param x store intersection distance
+ */
 static void	open_finite_cy(t_vec o, t_vec d, t_vec *nv, t_object *lst, double x[2])
 {
 	double		dist[2];
@@ -66,6 +91,15 @@ static void	open_finite_cy(t_vec o, t_vec d, t_vec *nv, t_object *lst, double x[
 		x[0] = INFINITY;
 }
 
+/**
+ * @brief find intersection to an infinite cylinder with no caps
+ * 
+ * @param x store intersection distance
+ * @param o ray origin
+ * @param d ray direction
+ * @param lst the intersected object
+ * @return true or false
+ */
 static int	infinite_cy(double x[2], t_vec o, t_vec d, t_object *lst)
 {
 	t_vec 	ocd;
@@ -91,6 +125,14 @@ static int	infinite_cy(double x[2], t_vec o, t_vec d, t_object *lst)
 	return (0);
 }
 
+/**
+ * @brief find closest intersection to cylinder body/caps
+ * 
+ * @param o ray origin
+ * @param d ray direction
+ * @param lst the intersected object
+ * @return the distance as double 
+ */
 double  solve_cy(t_vec o, t_vec d, t_object *lst)
 {
 	t_vec	adj_cy_nv;
