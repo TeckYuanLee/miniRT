@@ -12,6 +12,15 @@
 
 #include "minirt.h"
 
+/**
+ * @brief The solution for plane object
+ * 
+ * @param o ray origin
+ * @param d ray direction
+ * @param c plane center
+ * @param nv plane normalized vector
+ * @return the distance as double 
+ */
 double	solve_pl(t_vec o, t_vec d, t_vec c, t_vec nv)
 {
  	double  x;

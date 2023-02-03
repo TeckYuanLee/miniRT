@@ -91,7 +91,6 @@ t_vec	multiplier(t_vec rgb, double coef, int color)
 	return (rgb);
 }
 
-//
 /**
  * @brief calculate the final color of a pixel by taking into account
  * the lighting of the scene, the color of the object at that point,
