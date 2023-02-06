@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_ambient.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 13:10:07 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/08 18:36:46 by jatan            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:39:00 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	create_ambient(t_scene *scene, t_list **objects, char **conf)
 		return (error("Ambient ratio not in range [0.0, 1.0]", -1));
 	if (is_vec_format(conf[2]))
 		return (error("Ambient vector in wrong format", -1));
-	ambient->color = v_div_d(convrt_to_vec(conf[2]), 255);
+	ambient->color = convrt_to_int(conf[2]);
 	ambient->init = 1;
 	return (0);
 }

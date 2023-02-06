@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:30:30 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/10 12:12:06 by jatan            ###   ########.fr       */
+/*   Updated: 2023/02/06 12:12:24 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ typedef struct s_vector
 typedef struct s_plane
 {
 	t_vec	coor;
-	t_vec	orientation;
+	t_vec	nv;
 }				t_plane;
 
-typedef struct s_triangle
-{
-	t_vec	pt_one;
-	t_vec	pt_two;
-	t_vec	pt_three;
-}				t_triangle;
+// typedef struct s_triangle
+// {
+// 	t_vec	pt_one;
+// 	t_vec	pt_two;
+// 	t_vec	pt_three;
+// }				t_triangle;
 
 typedef struct s_sphere
 {
@@ -47,15 +47,11 @@ typedef struct s_sphere
 typedef struct s_cylinder
 {
 	t_vec	center;
+	t_vec	nv;
 	double	radius;
 	double	height;
 }				t_cylinder;
 
-typedef struct s_square
-{
-	t_vec	center;
-	double	radius;
-}				t_square;
 
 // typedef struct s_cube
 // {
@@ -64,9 +60,9 @@ typedef struct s_square
 // }	t_cube;
 
 
-# define CONFIG_ID "sp,pl,cy,A,C,L"
+# define CONFIG_ID "sp,pl,cy,A,C,R,l"
 
-enum e_id {sp, pl, cy, A, C, L};
+enum e_id {sp, pl, cy, A, C, R, l};
 union u_objects
 {
 	t_square	sq;
@@ -82,8 +78,8 @@ typedef struct s_object
 {
 	char			id;
 	union u_objects	obj;
-	t_vec			color;
-	struct s_object	*next;
+	int				color;
+	t_vec			normal;
 }				t_object;
 
 typedef struct s_ray
@@ -108,29 +104,36 @@ typedef struct s_ambient
 {
 	char	init;
 	double	ratio;
-	t_vec	color;
+	int		color;
 }				t_ambient;
 
 typedef struct s_light
 {
-	char	init;
-	t_vec	coor;
-	double	ratio;
-	t_vec	color;
+	t_vec			coor;
+	double			ratio;
+	int				color;
 }				t_light;
+
+typedef struct s_res
+{
+	int	xres;
+	int	yres;
+}				t_res;
 
 typedef struct s_scene
 {
+	t_res		res;
 	t_camera	camera;
 	t_ambient	ambient;
-	t_light		light;
+	t_list		*lights;
+	int			background;
 }				t_scene;
 
 
 typedef struct s_img
 {
 	void	*mlx_img;
-	char	*addr;
+	int		*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -141,24 +144,15 @@ typedef struct s_data
 	void	*mlx;
 	void	*win;
 	t_img	img;
-	int		w;
-	int		h;
 	t_scene	scene;
 	t_list	*objects;
 }				t_data;
 
-typedef struct s_res
+typedef struct s_itsxn
 {
-	int	res_init;
-	int	xres;
-	int	yres;
-}				t_res;
-
-typedef struct s_hit_rec {
-	t_vec	p;
+	int		color;
 	t_vec	normal;
-	double	t;
-	char	hit;
-}				t_hit_rec;
+	t_vec	point;
+}				t_itsxn;
 
 #endif

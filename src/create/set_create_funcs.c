@@ -11,20 +11,20 @@
 /* ************************************************************************** */
 
 #include "create.h"
-
+#include <stdio.h>
 #include <stdlib.h>
 
 t_crt_func	*set_crt_funcs(void)
 {
 	t_crt_func	*funcs;
 
-	funcs = (t_crt_func *)malloc(sizeof(t_crt_func) * (L + 1));
+	funcs = (t_crt_func *)malloc(sizeof(t_crt_func) * (l + 1));
 	funcs[sp] = create_sp;
-	funcs[pl] = NULL;
-	funcs[cy] = NULL;
+	funcs[pl] = create_pl;
+	funcs[cy] = create_cy;
 	funcs[A] = create_ambient;
 	funcs[C] = create_cam;
-	funcs[L] = create_light;
-
+	funcs[R] = create_res;
+	funcs[l] = create_light;
 	return (funcs);
 }

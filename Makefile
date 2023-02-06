@@ -13,14 +13,14 @@ MLXINC :=
 MLXLIB :=
 
 
-ifeq ($(OS_NAME), mac)
+ifeq ($(OS_NAME), darwin)
 	MLXINC += -I$(MLXDIR)
 	MLXLIB += -L$(MLXDIR) -lmlx -framework OpenGL -framework AppKit
 endif
 
 ifeq ($(OS_NAME), linux)
 	MLXINC += -I/usr/include -I$(MLXDIR) -O3
-	MLXLIB += -L$(MLXDIR) -lmlx -L/usr/lib -I$(MLXDIR) -lXext -lX11 -lm -lz
+	MLXLIB += -L$(MLXDIR) -lmlx -L/usr/lib -I$(MLXDIR) -lXext -lX11 -lm #-lz
 endif
 
 
@@ -31,7 +31,7 @@ LIB =  -L. -lminirt $(MLXLIB) -Llibft -lft
 TEST_SRC = $(wildcard test/*.c)
 
 # Put your src directory here
-SRC_DIRS = src src/hook src/utils src/vec_utils src/create src/hit
+SRC_DIRS = src src/hook src/utils src/vec_utils src/create src/hit src/render
 SRC = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 
 # SRC :=	$(addprefix src/, \
@@ -51,7 +51,7 @@ TEST_OBJ := $(TEST_SRC:%.c=$(OBJDIR)%.o)
 all: $(NAME)
 
 $(NAME): main.c libminirt.a
-	$(GCC) -o $@ main.c $(INC) $(LIB) 
+	$(GCC) -o $@ main.c $(INC) $(LIB)
 	@printf "$(GREEN)$@ is ready to run$(NC)\n"
 
 r: $(NAME)
@@ -59,7 +59,7 @@ r: $(NAME)
 	@./$<
 
 valgrind: $(NAME)
-		$(VALGRIND) ./$< config/test.rt
+		$(VALGRIND) ./$< scenes/more_spheres.rt
 
 libminirt.a: $(OBJ)
 	@ar rcs $@ $^
