@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:44:44 by telee             #+#    #+#             */
-/*   Updated: 2023/01/20 15:29:02 by jatan            ###   ########.fr       */
+/*   Updated: 2023/02/06 10:57:21 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ static t_vec	cam_position(int w, int h, t_scene *scene)
 	point.e1 = (((2 * e1) - 1) * asp_ratio * adj_fov) * -1;
 	point.e2 = (1 - (2 * e2)) * adj_fov;
 	point.e3 = 1;
-	return (point);
+
+	return (cam_direction(point, scene->camera.nv));
 }
 
 /**
@@ -98,28 +99,28 @@ static t_vec	cam_position(int w, int h, t_scene *scene)
  * @param scene	scenec struct fo camera and lights
  * @param objects list of objects
  */
-void	render_scene(t_data data)
+void	render_scene(t_data *data)
 {
 	int		color;
 	int		h;
 	int		w;
-	t_vec	dir;
+	t_ray	ray;
 
-	data.scene.background = 0x202020;
+	data->scene.background = 0x202020;
 	h = 0;
-	while (h < data.scene.res.yres)
+	while (h < data->scene.res.yres)
 	{
 		w = 0;
-		while (w < data.scene.res.xres)
+		while (w < data->scene.res.xres)
 		{
-			dir = cam_position(w, h, &data.scene);
-			dir = cam_direction(dir, data.scene.camera.nv);
-			color = trace_ray(dir, data);
-			data.img.addr[h * data.scene.res.xres + w] = color;
+			ray.origin = data->scene.camera.origin;
+			ray.dir = cam_position(w, h, &data->scene);
+			color = trace_ray(&ray, data);
+			data->img.addr[h * data->scene.res.xres + w] = color;
 			w++;
 		}
 		printf("\rRendering scene... [%.2f%%]",
-			(double)100 * h / data.scene.res.yres);
+			(double)100 * h / data->scene.res.yres);
 		h++;
 	}
 	printf("\rRendering scene...   [100%%]\n");

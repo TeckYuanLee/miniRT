@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 12:32:10 by jatan             #+#    #+#             */
-/*   Updated: 2023/02/06 10:53:33 by jatan            ###   ########.fr       */
+/*   Updated: 2023/02/06 11:18:13 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ t_vec		point_at_parameter(t_ray ray, double t);
 // ------ rendering functions -----
 
 void		render_scene(t_data *data);
-int			trace_ray(t_ray ray, t_data *data);
+int			trace_ray(t_ray *ray, t_data *data);
 int			light_itsxn(t_vec o, t_vec d, t_list *lst);
 void		calc_light(t_itsxn *itsxn, t_list *lights, t_ambient ambient, t_list *lst);
 double      solve_pl(t_vec o, t_vec d, t_vec c, t_vec nv);
 double		solve_sp(t_vec o, t_vec d, t_object *lst);
-void		ray_itsxn(t_vec d, t_data data, t_object *closest_obj, double *closest_itsxn);
+void		ray_itsxn(t_ray *ray, t_list *objects, t_object *closest_obj, double *closest_itsxn);
 
 double      solve_cy(t_vec o, t_vec d, t_object *lst);
 
