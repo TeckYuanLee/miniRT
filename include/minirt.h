@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 12:32:10 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/20 15:22:58 by jatan            ###   ########.fr       */
+/*   Updated: 2023/02/06 11:18:13 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdio.h>
 
 typedef int			(*t_crt_func)(t_scene *, t_list **, char **);
-typedef t_hit_rec	(*t_hit_func)(t_ray *, double, double, t_object	*);
+// typedef t_hit_rec	(*t_hit_func)(t_ray *, double, double, t_object	*);
 
 void		render_gradient(t_data *data);
 void		render_image(t_data *data, t_scene *scene, t_list *objects);
@@ -64,20 +64,20 @@ t_vec		normalize(t_vec p);
 double		distance(t_vec p1, t_vec p2);
 
 // ------ rendering functions -----
-t_hit_rec	run_hit_funcs(t_ray *r, double min, double max, t_object *obj);
+// t_hit_rec	run_hit_funcs(t_ray *r, double min, double max, t_object *obj);
 double		hit_sphere(t_vec center, double rad, t_ray r);
 
 t_vec		point_at_parameter(t_ray ray, double t);
 
 // ------ rendering functions -----
 
-void		render_scene(t_data data);
-int			trace_ray(t_vec d, t_data data);
+void		render_scene(t_data *data);
+int			trace_ray(t_ray *ray, t_data *data);
 int			light_itsxn(t_vec o, t_vec d, t_list *lst);
 void		calc_light(t_itsxn *itsxn, t_list *lights, t_ambient ambient, t_list *lst);
 double      solve_pl(t_vec o, t_vec d, t_vec c, t_vec nv);
 double		solve_sp(t_vec o, t_vec d, t_object *lst);
-void		ray_itsxn(t_vec d, t_data data, t_object *closest_obj, double *closest_itsxn);
+void		ray_itsxn(t_ray *ray, t_list *objects, t_object *closest_obj, double *closest_itsxn);
 
 double      solve_cy(t_vec o, t_vec d, t_object *lst);
 

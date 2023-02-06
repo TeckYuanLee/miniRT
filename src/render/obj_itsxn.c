@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 12:14:38 by telee             #+#    #+#             */
-/*   Updated: 2023/01/20 15:37:35 by jatan            ###   ########.fr       */
+/*   Updated: 2023/02/06 11:20:19 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 /**
  * @brief The solution for plane object
- * 
+ *
  * @param o ray origin
  * @param d ray direction
  * @param c plane center
  * @param nv plane normalized vector
- * @return the distance as double 
+ * @return the distance as double
  */
 double	solve_pl(t_vec o, t_vec d, t_vec c, t_vec nv)
 {
- 	double  x;
-	double  denom;
+	double	x;
+	double	denom;
 
- 	denom = dot(nv, d);
+	denom = dot(nv, d);
 	if (denom == 0)
 		return (INFINITY);
- 	x = (dot(nv, v_subtr(c, o))) / denom;
+	x = (dot(nv, v_subtr(c, o))) / denom;
 	if (x > 0)
 		return (x);
 	return (INFINITY);
@@ -79,26 +79,27 @@ double	solve_sp(t_vec o, t_vec d, t_object *lst)
  * @param closest_itsxn itsxn pointer to set
  */
 void	ray_itsxn(
-	t_vec d, t_data data, t_object *closest_obj, double *closest_itsxn)
+	t_ray *ray, t_list *objects, t_object *closest_obj, double *closest_itsxn)
 {
-	double	dist;
+	double		dist;
+	t_object	*curr_obj;
 
 	dist = 0;
-	while (data.objects)
+	while (objects)
 	{
-		if (((t_object *)(data.objects->content))->id == sp)
-			dist = solve_sp(data.scene.camera.origin,
-					d, (t_object *)data.objects->content);
-		else if (((t_object *)(data.objects->content))->id == pl)
-			dist = solve_pl(data.scene.camera.origin, d, ((t_object *)data.objects->content)->obj.pl.coor, ((t_object *)data.objects->content)->normal);
-		else if (((t_object *)(data.objects->content))->id == cy)
-			dist = solve_cy(data.scene.camera.origin,
-					d, (t_object *)data.objects->content);
+		curr_obj = objects->content;
+		if (curr_obj->id == sp)
+			dist = solve_sp(ray->origin, ray->dir, curr_obj);
+		else if (curr_obj->id == pl)
+			dist = solve_pl(ray->origin, ray->dir,
+					curr_obj->obj.pl.coor, curr_obj->normal);
+		else if (curr_obj->id == cy)
+			dist = solve_cy(ray->origin, ray->dir, curr_obj);
 		if (dist > 0.00001 && dist < *closest_itsxn)
 		{
-			*closest_obj = *((t_object *)(data.objects->content));
+			*closest_obj = *curr_obj;
 			*closest_itsxn = dist;
 		}
-		data.objects = data.objects->next;
+		objects = objects->next;
 	}
 }

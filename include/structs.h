@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 22:30:30 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/20 11:22:28 by jatan            ###   ########.fr       */
+/*   Updated: 2023/02/06 12:12:24 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ typedef struct s_plane
 	t_vec	nv;
 }				t_plane;
 
-typedef struct s_triangle
-{
-	t_vec	pt_one;
-	t_vec	pt_two;
-	t_vec	pt_three;
-}				t_triangle;
+// typedef struct s_triangle
+// {
+// 	t_vec	pt_one;
+// 	t_vec	pt_two;
+// 	t_vec	pt_three;
+// }				t_triangle;
 
 typedef struct s_sphere
 {
@@ -52,11 +52,6 @@ typedef struct s_cylinder
 	double	height;
 }				t_cylinder;
 
-typedef struct s_square
-{
-	t_vec	center;
-	double	radius;
-}				t_square;
 
 // typedef struct s_cube
 // {
@@ -70,11 +65,11 @@ typedef struct s_square
 enum e_id {sp, pl, cy, A, C, R, l};
 union u_objects
 {
-	t_square	sq;
+	// t_square	sq;
 	t_plane		pl;
 	t_sphere	sp;
 	t_cylinder	cy;
-	t_triangle	tr;
+	// t_triangle	tr;
 };
 
 //what if we put color here rather than repeating in all the obj structs?
@@ -85,7 +80,6 @@ typedef struct s_object
 	union u_objects	obj;
 	int				color;
 	t_vec			normal;
-	// struct s_object	*next;
 }				t_object;
 
 typedef struct s_ray
@@ -115,11 +109,9 @@ typedef struct s_ambient
 
 typedef struct s_light
 {
-	// char			init;
 	t_vec			coor;
 	double			ratio;
 	int				color;
-	// struct s_light	*next;
 }				t_light;
 
 typedef struct s_res
@@ -162,12 +154,5 @@ typedef struct s_itsxn
 	t_vec	normal;
 	t_vec	point;
 }				t_itsxn;
-
-typedef struct s_hit_rec {
-	t_vec	p;
-	t_vec	normal;
-	double	t;
-	char	hit;
-}				t_hit_rec;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:48:03 by telee             #+#    #+#             */
-/*   Updated: 2023/01/20 15:37:44 by jatan            ###   ########.fr       */
+/*   Updated: 2023/02/06 12:02:27 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,19 @@ int	color_x_light(int color, t_vec rgb)
  */
 int	light_itsxn(t_vec o, t_vec d, t_list *lst)
 {
-	double	dist;
+	double		dist;
+	t_object	*obj;
 
 	dist = 0;
 	while (lst)
 	{
-		if (((t_object *)lst->content)->id == sp)
-			dist = solve_sp(o, d, (t_object *)lst->content);
-		else if (((t_object *)lst->content)->id == pl)
-			dist = solve_pl(o, d, ((t_object *)lst->content)->obj.pl.coor, ((t_object *)lst->content)->normal);
-		else if (((t_object *)lst->content)->id == cy)
-			dist = solve_cy(o, d, (t_object *)lst->content);
+		obj = lst->content;
+		if (obj->id == sp)
+			dist = solve_sp(o, d, obj);
+		else if (obj->id == pl)
+			dist = solve_pl(o, d, obj->obj.pl.coor, obj->normal);
+		else if (obj->id == cy)
+			dist = solve_cy(o, d, obj);
 		if (dist > 0.00001 && dist < 1)
 			return (0);
 		lst = lst->next;
