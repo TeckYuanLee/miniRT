@@ -1,6 +1,6 @@
 NAME = miniRT
 
-GCC = gcc -Wall -Wextra -Werror -fsanitize=address -g3
+GCC = gcc -Wall -Wextra -Werror -g3
 OS_NAME := $(shell uname -s | tr A-Z a-z)
 VALGRIND = valgrind --leak-check=full \
          --show-leak-kinds=all \
@@ -25,7 +25,7 @@ endif
 
 
 INC = -Iinclude -Ilibft $(MLXINC)
-LIB =  -L. -lminirt $(MLXLIB) -Llibft #-lft
+LIB =  -L. -lminirt $(MLXLIB) -Llibft -lft
 
 
 TEST_SRC = $(wildcard test/*.c)
@@ -50,8 +50,8 @@ TEST_OBJ := $(TEST_SRC:%.c=$(OBJDIR)%.o)
 
 all: $(NAME)
 
-$(NAME): main.c libminirt.a libft.a
-	$(GCC) -o $@ main.c $(INC) $(LIB) libft.a
+$(NAME): main.c libminirt.a
+	$(GCC) -o $@ main.c $(INC) $(LIB)
 	@printf "$(GREEN)$@ is ready to run$(NC)\n"
 
 r: $(NAME)

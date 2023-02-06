@@ -6,7 +6,7 @@
 /*   By: telee <telee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 18:52:19 by jatan             #+#    #+#             */
-/*   Updated: 2023/02/06 16:16:15 by telee            ###   ########.fr       */
+/*   Updated: 2023/02/06 18:12:16 by telee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	handle_key_release(int keycode, t_data *data)
 		mlx_destroy_image(data->mlx, data->img.mlx_img);
 		free(data->mlx);
 		ft_lstclear(&data->objects, free);
+		system("leaks miniRT");
 		exit(0);
 	}
 	return (0);
