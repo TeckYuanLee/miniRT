@@ -41,10 +41,19 @@ t_vec	normalize(t_vec p)
 	return (v_div_d(p, length(p)));
 }
 
-double	distance(t_vec p1, t_vec p2)
-{
-	double	d;
+// double	distance(t_vec p1, t_vec p2)
+// {
+// 	double	d;
 
-	d = sqrt(dot(p1, p2));
+// 	d = sqrt(dot(p1, p2));
+// 	return (d);
+// }
+
+
+double		distance(t_vec p1, t_vec p2)
+{
+	double d;
+
+	d = sqrt(dot(v_subtr(p2, p1),v_subtr(p2, p1)));
 	return (d);
 }
