@@ -65,11 +65,11 @@ typedef struct s_cylinder
 enum e_id {sp, pl, cy, A, C, R, l};
 union u_objects
 {
-	t_square	sq;
+	// t_square	sq;
 	t_plane		pl;
 	t_sphere	sp;
 	t_cylinder	cy;
-	t_triangle	tr;
+	// t_triangle	tr;
 };
 
 //what if we put color here rather than repeating in all the obj structs?

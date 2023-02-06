@@ -20,7 +20,7 @@
 # include <stdio.h>
 
 typedef int			(*t_crt_func)(t_scene *, t_list **, char **);
-typedef t_hit_rec	(*t_hit_func)(t_ray *, double, double, t_object	*);
+// typedef t_hit_rec	(*t_hit_func)(t_ray *, double, double, t_object	*);
 
 void		render_gradient(t_data *data);
 void		render_image(t_data *data, t_scene *scene, t_list *objects);
@@ -64,7 +64,7 @@ t_vec		normalize(t_vec p);
 double		distance(t_vec p1, t_vec p2);
 
 // ------ rendering functions -----
-t_hit_rec	run_hit_funcs(t_ray *r, double min, double max, t_object *obj);
+// t_hit_rec	run_hit_funcs(t_ray *r, double min, double max, t_object *obj);
 double		hit_sphere(t_vec center, double rad, t_ray r);
 
 t_vec		point_at_parameter(t_ray ray, double t);
