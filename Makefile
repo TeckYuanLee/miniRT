@@ -1,4 +1,4 @@
-NAME = minirt
+NAME = miniRT
 
 GCC = gcc -Wall -Wextra -Werror -fsanitize=address -g3
 OS_NAME := $(shell uname -s | tr A-Z a-z)
