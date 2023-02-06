@@ -1,6 +1,6 @@
 NAME = minirt
 
-GCC = gcc -Wall -Wextra -Werror -g3
+GCC = gcc -Wall -Wextra -Werror -fsanitize=address -g3
 OS_NAME := $(shell uname -s | tr A-Z a-z)
 VALGRIND = valgrind --leak-check=full \
          --show-leak-kinds=all \

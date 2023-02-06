@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: telee <telee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:30:39 by jatan             #+#    #+#             */
-/*   Updated: 2023/02/06 12:10:12 by jatan            ###   ########.fr       */
+/*   Updated: 2023/02/06 16:45:15 by telee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ int	main(int argc, char **argv)
 	}
 	data.objects = NULL;
 	configs = parse_conf_file(argv[1]);
-	populate_scene(configs, &data.scene, &data.objects);
+	if (configs == NULL)
+		return (1);
+	if (populate_scene(configs, &data.scene, &data.objects) == -1)
+		return (1);
 	ft_free_array(configs);
 	free(configs);
 	init_data(&data);

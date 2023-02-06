@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_cy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: telee <telee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 20:00:54 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/16 17:30:08 by jatan            ###   ########.fr       */
+/*   Updated: 2023/02/06 17:09:05 by telee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	create_cy(t_scene *scene, t_list **objects, char **conf)
 	t_object	*obj;
 
 	(void)scene;
+	if (!conf[5] || conf[6])
+		return (error("Cylinder config invalid", -1));
 	obj = malloc(sizeof(t_object));
 	if (obj == NULL)
 	{
@@ -34,8 +36,8 @@ int	create_cy(t_scene *scene, t_list **objects, char **conf)
 		return (-1);
 	}
 	obj->id = cy;
-	if (is_vec_format(conf[1]) && is_vec_format(conf[2])
-		&& is_vec_format(conf[5]))
+	if (is_vec_format(conf[1]) || is_vec_format(conf[2])
+		|| is_vec_format(conf[5]))
 		return (error("Cylinder vector in wrong format", -1));
 	obj->obj.cy.center = convrt_to_vec(conf[1]);
 	obj->obj.cy.nv = convrt_to_vec(conf[2]);

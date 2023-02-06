@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   populate_scene.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: telee <telee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 08:43:26 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/20 15:36:53 by jatan            ###   ########.fr       */
+/*   Updated: 2023/02/06 16:54:05 by telee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_scene	init_scene(void)
 	ret.camera.init = 0;
 	ret.ambient.init = 0;
 	ret.lights = NULL;
+	ret.res.xres = 800;
+	ret.res.yres = 600;
 	return (ret);
 }
 
@@ -39,21 +41,15 @@ int	identify_and_create(
 		identifier = ft_split(CONFIG_ID, ',');
 	i = -1;
 	while (identifier[++i])
-	{
 		if (ft_strncmp(identifier[i], line[0], ft_strlen(line[0])) == 0)
-		{
 			break ;
-		}
-	}
 	if (i > l)
 	{
 		ft_putstr_fd(YELLOW"WARNING: Unrecognized characters\n"RESET, 2);
 		return (1);
 	}
 	if (crt_funcs[i](scene, objects, line) == -1)
-	{
 		return (-1);
-	}
 	return (1);
 }
 
@@ -80,8 +76,12 @@ void	show_light(void *light)
 /**
  * for each line in conf, split with space, identify identifier, keep track
  * of A, C, L(only can have one of these), run different create for each
+ * 
+ * For debugging:
+ * ft_lstiter(*objects, show_objects);
+ * ft_lstiter(scene->lights, show_light);
 */
-void	populate_scene(char **conf, t_scene *scene, t_list **objects)
+int	populate_scene(char **conf, t_scene *scene, t_list **objects)
 {
 	char		**line;
 	int			stat;
@@ -95,17 +95,16 @@ void	populate_scene(char **conf, t_scene *scene, t_list **objects)
 		stat = identify_and_create(line, scene, objects, create_funcs);
 		if (stat == -1)
 		{
-			ft_putstr_fd(RED"Error: Unabale to populate scene\n"RESET, 2);
+			ft_putstr_fd(RED"Error: Unable to populate scene\n"RESET, 2);
 			ft_lstclear(objects, free);
 			ft_lstclear(&scene->lights, free);
 		}
 		ft_free_array(line);
 		free(line);
 		if (stat == -1)
-			break ;
+			return (stat);
 		conf++;
 	}
-	ft_lstiter(*objects, show_objects);
-	ft_lstiter(scene->lights, show_light);
 	free(create_funcs);
+	return (0);
 }

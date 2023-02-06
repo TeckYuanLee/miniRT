@@ -6,7 +6,7 @@
 /*   By: telee <telee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:10:09 by telee             #+#    #+#             */
-/*   Updated: 2023/02/06 16:16:54 by telee            ###   ########.fr       */
+/*   Updated: 2023/02/06 16:55:51 by telee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	exit_win(t_data *data)
 {
 	mlx_destroy_image(data->mlx, data->img.mlx_img);
 	mlx_destroy_window(data->mlx, data->win);
-    free(data->mlx);
-    ft_lstclear(&data->objects, free);
+	free(data->mlx);
+	ft_lstclear(&data->objects, free);
 	exit(0);
 }

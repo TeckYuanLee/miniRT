@@ -6,7 +6,7 @@
 /*   By: telee <telee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 12:32:10 by jatan             #+#    #+#             */
-/*   Updated: 2023/02/06 16:13:59 by telee            ###   ########.fr       */
+/*   Updated: 2023/02/06 16:45:45 by telee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 typedef int			(*t_crt_func)(t_scene *, t_list **, char **);
 
 char		**parse_conf_file(char *filename);
-void		populate_scene(char **conf, t_scene *scene, t_list **objects);
+int 		populate_scene(char **conf, t_scene *scene, t_list **objects);
 char		*get_next_line(int fd);
 
 t_vec		convrt_to_vec(const char *conf);

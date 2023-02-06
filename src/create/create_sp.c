@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_sp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: telee <telee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 20:00:54 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/16 16:28:05 by jatan            ###   ########.fr       */
+/*   Updated: 2023/02/06 17:09:38 by telee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	create_sp(t_scene *scene, t_list **objects, char **conf)
 	t_object	*obj;
 
 	(void)scene;
+	if (!conf[3] || conf[4])
+		return (error("Sphere config invalid", -1));
 	obj = malloc(sizeof(t_object));
 	if (obj == NULL)
 	{
@@ -31,7 +33,7 @@ int	create_sp(t_scene *scene, t_list **objects, char **conf)
 		return (-1);
 	}
 	obj->id = sp;
-	if (is_vec_format(conf[1]) && is_vec_format(conf[2]))
+	if (is_vec_format(conf[1]) || is_vec_format(conf[3]))
 		return (error("Sphere vector in wrong format", -1));
 	obj->obj.sp.center = convrt_to_vec(conf[1]);
 	obj->obj.sp.radius = ft_atod(conf[2]) / 2;
