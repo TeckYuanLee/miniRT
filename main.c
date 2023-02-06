@@ -68,6 +68,7 @@ int	main(int argc, char **argv)
 	init_data(&data);
 	render(&data);
 	mlx_hook(data.win, 3, 1L << 1, handle_key_release, &data);
+	mlx_hook(data.win, 17, 1L << 1, exit_win, &data);
 	mlx_loop(data.mlx);
 	mlx_destroy_image(data.mlx, data.img.mlx_img);
 	free(data.mlx);

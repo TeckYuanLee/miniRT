@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_key_release.c                               :+:      :+:    :+:   */
+/*   exit_win.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: telee <telee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 18:52:19 by jatan             #+#    #+#             */
-/*   Updated: 2023/02/06 16:16:15 by telee            ###   ########.fr       */
+/*   Created: 2023/02/06 16:10:09 by telee             #+#    #+#             */
+/*   Updated: 2023/02/06 16:16:54 by telee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include <mlx.h>
 
-int	handle_key_release(int keycode, t_data *data)
+int	exit_win(t_data *data)
 {
-	printf("keycode: %d\n", keycode);
-	if (keycode == 65307 || keycode == 53)
-	{
-		mlx_destroy_window(data->mlx, data->win);
-		data->win = NULL;
-		mlx_destroy_image(data->mlx, data->img.mlx_img);
-		free(data->mlx);
-		ft_lstclear(&data->objects, free);
-		exit(0);
-	}
-	return (0);
+	mlx_destroy_image(data->mlx, data->img.mlx_img);
+	mlx_destroy_window(data->mlx, data->win);
+    free(data->mlx);
+    ft_lstclear(&data->objects, free);
+	exit(0);
 }
