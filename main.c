@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:30:39 by jatan             #+#    #+#             */
-/*   Updated: 2023/02/06 10:34:16 by jatan            ###   ########.fr       */
+/*   Updated: 2023/02/06 12:10:12 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	init_data(t_data *data)
 			&data->img.endian);
 }
 
-
 /**
  * @brief a function to call the ray tracing function and put image on window
  * Can just change the `render_image` function to your own ray trace function
@@ -39,16 +38,15 @@ void	init_data(t_data *data)
  * @param data
  * @return int
  */
-int	render(t_data data)
+int	render(t_data *data)
 {
-	if (data.win == NULL)
+	if (data->win == NULL)
 		return (1);
 	render_scene(data);
-	mlx_put_image_to_window(data.mlx, data.win, data.img.mlx_img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
 	ft_putstr_fd("Rendered image and putted image to window...\n", 1);
 	return (0);
 }
-
 
 // Have to initialize objects and ligths pointer to NULL, else there will be
 // garbage value in it and caused the linked list to fail (line 66, 67)
@@ -68,11 +66,9 @@ int	main(int argc, char **argv)
 	ft_free_array(configs);
 	free(configs);
 	init_data(&data);
-	render(data);
+	render(&data);
 	mlx_hook(data.win, 3, 1L << 1, handle_key_release, &data);
-
 	mlx_loop(data.mlx);
-
 	mlx_destroy_image(data.mlx, data.img.mlx_img);
 	free(data.mlx);
 	ft_lstclear(&data.objects, free);

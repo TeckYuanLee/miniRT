@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:44:44 by telee             #+#    #+#             */
-/*   Updated: 2023/02/06 10:57:21 by jatan            ###   ########.fr       */
+/*   Updated: 2023/02/06 12:02:54 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ static t_vec	cam_position(int w, int h, t_scene *scene)
 	point.e1 = (((2 * e1) - 1) * asp_ratio * adj_fov) * -1;
 	point.e2 = (1 - (2 * e2)) * adj_fov;
 	point.e3 = 1;
-
 	return (cam_direction(point, scene->camera.nv));
 }
 
