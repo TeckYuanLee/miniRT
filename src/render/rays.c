@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 13:22:20 by telee             #+#    #+#             */
-/*   Updated: 2023/01/20 15:38:03 by jatan            ###   ########.fr       */
+/*   Updated: 2023/02/06 10:47:12 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	calc_normal(t_vec p, t_vec d, t_vec *normal, t_object *l)
  * @param data
  * @return int the color value
  */
-int	trace_ray(t_vec d, t_data data)
+int	trace_ray(t_vec d, t_data *data)
 {
 	t_itsxn		itsxn;
 	t_object	closest_obj;
@@ -54,14 +54,14 @@ int	trace_ray(t_vec d, t_data data)
 
 	closest_obj.id = -1;
 	closest_itsxn = INFINITY;
-	ray_itsxn(d, data, &closest_obj, &closest_itsxn);
-	itsxn.point = v_sum(data.scene.camera.origin,
+	ray_itsxn(d, *data, &closest_obj, &closest_itsxn);
+	itsxn.point = v_sum(data->scene.camera.origin,
 			v_multi_d(d, closest_itsxn));
 	calc_normal(itsxn.point, d, &(itsxn.normal), &closest_obj);
 	if (closest_obj.id == -1)
-		itsxn.color = data.scene.background;
+		itsxn.color = data->scene.background;
 	else
 		itsxn.color = closest_obj.color;
-	calc_light(&itsxn, data.scene.lights, data.scene.ambient, data.objects);
+	calc_light(&itsxn, data->scene.lights, data->scene.ambient, data->objects);
 	return (itsxn.color);
 }

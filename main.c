@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:30:39 by jatan             #+#    #+#             */
-/*   Updated: 2023/01/20 14:57:50 by jatan            ###   ########.fr       */
+/*   Updated: 2023/02/06 10:34:16 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	main(int argc, char **argv)
 		return (-1);
 	}
 	data.objects = NULL;
-	// data.scene.lights = NULL;
 	configs = parse_conf_file(argv[1]);
 	populate_scene(configs, &data.scene, &data.objects);
 	ft_free_array(configs);
