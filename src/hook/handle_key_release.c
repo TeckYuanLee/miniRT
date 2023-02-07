@@ -6,7 +6,7 @@
 /*   By: telee <telee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 18:52:19 by jatan             #+#    #+#             */
-/*   Updated: 2023/02/06 18:12:16 by telee            ###   ########.fr       */
+/*   Updated: 2023/02/07 12:09:06 by telee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <mlx.h>
 
+// system("leaks miniRT");
 int	handle_key_release(int keycode, t_data *data)
 {
 	printf("keycode: %d\n", keycode);
@@ -25,7 +26,6 @@ int	handle_key_release(int keycode, t_data *data)
 		mlx_destroy_image(data->mlx, data->img.mlx_img);
 		free(data->mlx);
 		ft_lstclear(&data->objects, free);
-		// system("leaks miniRT");
 		exit(0);
 	}
 	return (0);

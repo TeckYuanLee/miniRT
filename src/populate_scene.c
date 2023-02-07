@@ -6,7 +6,7 @@
 /*   By: telee <telee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 08:43:26 by jatan             #+#    #+#             */
-/*   Updated: 2023/02/06 17:48:23 by telee            ###   ########.fr       */
+/*   Updated: 2023/02/07 12:09:04 by telee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,5 @@ int	populate_scene(char **conf, t_scene *scene, t_list **objects)
 		conf++;
 	}
 	free(create_funcs);
-	ft_lstiter(*objects, show_objects);
- 	ft_lstiter(scene->lights, show_light);
 	return (0);
 }
