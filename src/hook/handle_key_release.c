@@ -25,7 +25,7 @@ int	handle_key_release(int keycode, t_data *data)
 		mlx_destroy_image(data->mlx, data->img.mlx_img);
 		free(data->mlx);
 		ft_lstclear(&data->objects, free);
-		system("leaks miniRT");
+		// system("leaks miniRT");
 		exit(0);
 	}
 	return (0);

@@ -114,6 +114,7 @@ void	render_scene(t_data *data)
 		{
 			ray.origin = data->scene.camera.origin;
 			ray.dir = cam_position(w, h, &data->scene);
+			show_vec(ray.dir);
 			color = trace_ray(&ray, data);
 			data->img.addr[h * data->scene.res.xres + w] = color;
 			w++;
